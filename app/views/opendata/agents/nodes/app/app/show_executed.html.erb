@@ -1,0 +1,23 @@
+<% return if controller.filters.include?(:preview) %>
+<% if @app.present? %>
+<%= jquery do %>
+var add;
+add = <%= @add %>;
+if (add === true) {
+  $.ajax({
+    url: "<%= @app.executed_add_url %>",
+    data: {
+      authenticity_token: "<%= form_authenticity_token %>"
+    },
+    type: "POST",
+    success: function (data) {
+      $("#executed").html(data);
+    }
+  });
+}
+<% end %>
+
+  <% if @add == false %>
+    <%= @app.executed.to_i %> <%= I18n.t("opendata.labels.time") %>
+  <% end %>
+<% end %>

@@ -1,0 +1,198 @@
+ja:
+  gws/discussion:
+    admin: 管理
+    topics: スレッド
+    todos: ToDo
+    members: 参加者
+    navi:
+      forum:
+        readable: 会議室一覧
+      topic:
+        portal: 会議室ポータル
+        readable: スレッド一覧
+      todo:
+        readable: ToDo一覧
+    links:
+      forum:
+        back_to_index: 会議室一覧へ戻る
+        edit: 会議室の編集
+      topic:
+        new: スレッドを新規作成
+        edit: スレッドを編集する
+        copy: スレッドを複製する
+        delete: スレッドを削除する
+        index: スレッド一覧を見る
+        show: 全ての投稿を見る
+        reply: コメントを投稿する
+      todo:
+        index: ToDo一覧を見る
+      member:
+        index: 参加者一覧
+    main_topic:
+      name: メインスレッド
+      text: '%{name}のメインスレッドです。'
+    options:
+      discussion_unseen_interval:
+        none: 確認しない
+        5min: ５分
+        1min: １分
+        30sec: ３０秒
+        10sec: １０秒
+      permit_comment:
+        allow: 許可する
+        deny: 許可しない
+    notice:
+      reload: ※新着投稿があります。クリックすることで再描画します。
+      forum_copy: ※複製後は非公開状態になります。ToDo は複製されません。
+      comment_limit: 'コメント数が%{limit}件を超えました。新規スレッドを作成してください。'
+      no_topics: スレッドはありません。
+      no_recents: 新着はありません。
+      no_todos: 登録されていません
+    notify_message:
+      topic:
+        subject: '[電子会議室] %{forum_name} に投稿がありました'
+        text: |-
+          スレッドが作成されました。
+
+          スレッド: %{topic_name}
+
+          %{text}
+      post:
+        subject: '[電子会議室] %{forum_name}(%{topic_name}) に投稿がありました'
+        text: |-
+          コメントが投稿されました。
+
+          スレッド: %{topic_name}
+
+          %{text}
+  modules:
+    gws/discussion: 電子会議室
+    addons:
+      gws/discussion/todo: ToDo
+      gws/discussion/release: 公開設定
+      gws/discussion/group_setting: 電子会議室
+      gws/discussion/quota: 容量制限
+
+  mongoid:
+    models:
+      gws/discussion/forum: 電子会議室
+      gws/discussion/topic: スレッド
+      gws/discussion/post: コメント
+    errors:
+      models:
+        gws/addon/discussion/quota:
+          file_size_limit: 添付ファイルのサイズ（%{size}）が 最大サイズ（%{limit}）を超えました。
+          total_quota_over: "電子会議室の総容量制限を超過している為、保存できませんでした。"
+          forum_quota_over: "電子会議室の容量制限を超過している為、保存できませんでした。"
+          topic_quota_over: "スレッドの容量制限を超過している為、保存できませんでした。"
+    attributes:
+      gws/discussion/postable:
+        name: タイトル
+        depth: 層
+        descendants_updated: スレッド内更新日時
+        main_topic: メインスレッド
+        permit_comment: コメント投稿
+        permanently: 編集禁止
+        forum_quota: 電子会議室容量制限
+        topic_quota: スレッド容量制限
+        order: 並び順
+        forum_id: 電子会議室
+        topic_id: スレッド
+        parent_id: 親投稿
+      gws/addon/discussion/quota:
+        size: 使用量
+      gws/addon/discussion/group_permission:
+        group_ids: 管理グループ
+        groups_hash: 管理グループ
+        user_ids: 管理ユーザー
+        users_hash: 管理ユーザー
+        custom_group_ids: 管理カスタムグループ
+        custom_groups_hash: 管理カスタムグループ
+        permission_level: 権限レベル
+      gws/addon/discussion/release:
+        released: 公開日時
+      gws/addon/discussion/readable_setting:
+        readable_group_ids: 閲覧グループ
+        readable_member_ids: 閲覧ユーザー
+        readable_custom_group_ids: 閲覧カスタムグループ
+      gws/addon/discussion/group_setting:
+        discussion_quota: 総容量制限
+        discussion_filesize_limit: 添付サイズ制限
+        discussion_new_days: 新着表示期間
+        discussion_unseen_interval: 新着確認の間隔
+        discussion_recent_limit: 新着表示件数
+        discussion_todo_limit: ToDo表示件数
+        discussion_comment_limit: コメントの上限
+
+  gws_role:
+    read_other_gws_discussion_forums: 電子会議室の閲覧（全て）
+    read_private_gws_discussion_forums: 電子会議室の閲覧（所有）
+    edit_other_gws_discussion_forums: 電子会議室の編集（全て）
+    edit_private_gws_discussion_forums: 電子会議室の編集（所有）
+    delete_other_gws_discussion_forums: 電子会議室の削除（全て）
+    delete_private_gws_discussion_forums: 電子会議室の削除（所有）
+    trash_other_gws_discussion_forums: 電子会議室ゴミ箱の管理（全て）
+    trash_private_gws_discussion_forums: 電子会議室ゴミ箱の管理（所有）
+    read_other_gws_discussion_topics: スレッドの閲覧（全て）
+    read_private_gws_discussion_topics: スレッドの閲覧（所有）
+    edit_other_gws_discussion_topics: スレッドの編集（全て）
+    edit_private_gws_discussion_topics: スレッドの編集（所有）
+    delete_other_gws_discussion_topics: スレッドの削除（全て）
+    delete_private_gws_discussion_topics: スレッドの削除（所有）
+    edit_other_gws_discussion_posts: 投稿の編集（全て）
+    edit_private_gws_discussion_posts: 投稿の編集（所有）
+    delete_other_gws_discussion_posts: 投稿の削除（全て）
+    delete_private_gws_discussion_posts: 投稿の削除（所有）
+
+  tooltip:
+    gws/discussion/forum:
+      name:
+        - タイトルを入力します。
+      forum_quota:
+        - 電子会議室の使用容量の上限を入力します。
+        - 使用容量が超えた場合、投稿ができません。
+        - 未設定である場合、制限されません。
+        - 初期値は 未設定 です。
+    gws/discussion/topic:
+      name:
+        - タイトルを入力します。
+      order:
+        - 並び順を設定します。数字が小さいほど先頭に表示されます。
+      order:
+        - 並び順を設定します。数字が小さいほど先頭に表示されます。
+      permit_comment:
+        - コメントを許可するかどうかを選択します。
+      permanently:
+        - 有効にするとコメントの投稿、編集、削除を行えなくなります。
+      topic_quota:
+        - スレッドの使用容量の上限を入力します。
+        - 使用容量が超えた場合、投稿ができません。
+        - 未設定である場合、制限されません。
+        - 初期値は 未設定 です。
+    gws/addon/discussion/release:
+      state:
+        - 公開画面への公開、非公開を選択します。
+    gws/addon/discussion/group_setting:
+      discussion_quota:
+        - 電子会議室の合計容量の上限を入力します。
+        - 合計容量が超えた場合、投稿ができません。
+        - 未設定である場合、制限されません。
+        - 初期値は 未設定 です。
+      discussion_filesize_limit:
+        - スレッドまたは投稿に添付されるファイルの合計容量の上限を入力します。
+        - 未設定である場合、制限されません。
+        - 初期値は 未設定 です。
+      discussion_new_days:
+        - 新着表示期間を設定します。
+      discussion_unseen_interval:
+        - 新着確認の間隔を設定します。
+      discussion_recent_limit:
+        - 新着一覧の表示件数を設定します。
+      discussion_todo_limit:
+        - ToDoの表示件数を設定します。
+      discussion_comment_limit:
+        - １スレッドに対するコメントの上限を設定します。
+
+  job:
+    models:
+      gws/discussion/trash_purge_job: 電子会議室ゴミ箱の掃除

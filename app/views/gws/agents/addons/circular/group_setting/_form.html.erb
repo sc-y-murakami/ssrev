@@ -1,0 +1,17 @@
+<%= jquery do %> SS_AddonTabs.hide(".addon-gws-circular-group-setting"); <% end %>
+
+<dl class="see addon-gws-circular-group-setting">
+  <dt><%= @model.t :circular_default_due_date %><%= @model.tt :circular_default_due_date %></dt>
+  <dd class="short"><%= f.number_field :circular_default_due_date %> <span class="postfix"><%= t('datetime.prompts.day') %></span></dd>
+
+  <dt><%= @model.t :circular_filesize_limit %><%= @model.tt :circular_filesize_limit %></dt>
+  <dd class="short"><%= f.number_field :circular_filesize_limit %> <span class="postfix"><%= t('ss.units.mega_byte') %></span></dd>
+
+  <% if false %>
+  <dt><%= @model.t :circular_delete_threshold %><%= @model.tt :circular_delete_threshold %></dt>
+  <dd><%= f.select :circular_delete_threshold, @item.circular_delete_threshold_options %></dd>
+  <% end %>
+
+  <dt><%= @model.t :circular_files_break %><%= @model.tt :circular_files_break %></dt>
+  <dd><%= f.select :circular_files_break, @item.circular_files_break_options %></dd>
+</dl>

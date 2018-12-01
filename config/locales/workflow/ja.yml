@@ -1,0 +1,201 @@
+ja:
+  workflow:
+    name: ワークフロー
+    request: 承認申請
+    request_to: 申請先
+    selectable_users: 選択候補
+    pages: 承認
+    user_deleted: 削除ユーザー
+    master_message: 以下の差し替えページが作成されています。
+    master_page: 差し替え元ページ
+    branch_message: このページは差し替えページです。
+    branch_page: 差し替えページ
+    create_branch: 差し替えページを作成する
+    cloned_name_prefix: 複製
+    member: ログインメンバー
+    empty_route_options: 承認経路が設定されていません。
+    request_cancelled_message: 承認申請は申請者によってキャンセルされました。
+    restart_workflow: 再申請
+    circulation_step: 回覧
+    circulation_comment: コメント
+    state:
+      request: 申請中
+      approve: 承認
+      pending: 下位承認待ち
+      remand: 差し戻し
+      cancelled: 申請キャンセル
+      other_approved: 他者承認済
+      other_remanded: 他者差し戻し
+      other_pulled_up: 引き上げ
+    circulation_state:
+      seen: 確認済
+      unseen: 回覧中
+      pending: 下位承認待ち
+    links:
+      set_seen: 確認済にする
+      unset_seen: 回覧中に戻す
+      approver_file_upload: ファイル追加
+    buttons:
+      select: 選択
+      cancel: 取消
+      request: 申請
+      approve: 承認
+      remand: 差し戻し
+      pull_up: 引き上げ承認
+      restart: 再申請
+    mail:
+      subject:
+        request: 承認申請
+        approve: 最終承認完了
+        remand: 承認差し戻し
+    page:
+      ready: 公開待ち
+      closed: 非公開
+      wait_close: 公開終了間近
+      approve: 依頼されたもの
+      request: 申請したもの
+      remand: 差し戻されたもの
+    route: 承認経路
+    options:
+      required_count:
+        all: 全員
+        minimum: "%{required_count} 人"
+      posted_by:
+        member: マイページ投稿
+        admin: 管理側投稿
+      on_remand:
+        back_to_init: 最初に戻る
+        back_to_previous: 直前に戻る
+    required_count_label:
+      all: 全員の承認が必要
+      minimum: "%{required_count} 人の承認が必要"
+    search_approvers:
+      index: 承認者を選択する
+      select: 承認者を設定する
+      search: 検索
+    search_circulations:
+      index: 回覧者を選択する
+      select: 回覧者を設定する
+      search: 検索
+    confirm:
+      request_cancel: 申請を取り消してもよろしいですか？
+      set_seen: 既読にしてもよろしいですか？
+      unset_seen: 未読にしてもよろしいですか？
+    notice:
+      request_cancelled: 申請を取り消しました。
+      set_seen: 既読にしました。
+      unset_seen: 未読にしました。
+      approver_file_droppable: ファイル追加ボタンをクリックするか、ここにファイルをドロップしてください。
+    csv:
+      approvers_or_circulations: 承認者・回覧者
+    agent_name: "（代理: %{long_name}）"
+    agent_name_with_email: "（代理: %{long_name}(%{email})）"
+
+  modules:
+    workflow: ワークフロー
+    addons:
+      workflow/approver: 承認
+      workflow/branch: 差し替えページ
+      workflow/approver_view: 承認経路
+      workflow/circulation_view: 回覧経路
+
+  cms_role:
+    read_other_workflow_routes: 承認ルートの閲覧（全て）
+    read_private_workflow_routes: 承認ルートの閲覧（所有）
+    edit_other_workflow_routes: 承認ルートの編集（全て）
+    edit_private_workflow_routes: 承認ルートの編集（所有）
+    delete_other_workflow_routes: 承認ルートの削除（全て）
+    delete_private_workflow_routes: 承認ルートの削除（所有）
+
+  mongoid:
+    models:
+      workflow/route: 承認経路
+    attributes:
+      workflow/addon/approver:
+        workflow_user_id: 申請者
+        workflow_state: 承認状態
+        workflow_comment: 申請コメント
+        workflow_pull_up: 引き上げ承認
+        workflow_on_remand: 差し戻し時
+        workflow_approvers: 承認者
+        workflow_required_counts: 必要承認数
+        workflow_circulations: 回覧者
+        approved: 承認日時
+        comment: 差し戻しコメント
+        approver_comment: 承認者コメント
+      workflow/model/route:
+        name: 名前
+        pull_up: 引き上げ承認
+        on_remand: 差し戻し時
+        approvers: 承認者
+        circulations: 回覧者
+        required_counts: 必要承認数
+        group_ids: グループ
+        level: "%{level} 段目"
+        my_group: "自所属"
+        approver_at: "%{level} 段目の承認者"
+        required_count_at: "%{level} 段目の必要承認数"
+        approvers_level: 段
+        approvers_user_id: 申請者
+        approver_attachment_uses: 承認者によるファイル追加
+        circulation_attachment_uses: 回覧者によるファイル追加
+
+  errors:
+    messages:
+      not_select: "が選択されていません。"
+      level_blank: "のレベルが設定されていません。"
+      user_id_blank: "のユーザが設定されていません。"
+      state_blank: "の状態が設定されていません。"
+      not_read: "に設定されている %{name} は、閲覧権限がありません。"
+      not_approve: "に設定されている %{name} は、承認権限がありません。"
+      approvers_level_blank: "段が設定されていません。"
+      approvers_level_missing: "%{level} 段目の承認者を設定してください。"
+      approvers_user_id_blank: "ユーザが設定されていません。"
+      approvers_user_missing: "削除ユーザが存在します。"
+      required_count_greater_than_approvers: "%{level} 段目に設定されている承認者が、必要承認数 %{required_count} より少ないです。"
+      route_approver_unable_to_read: "承認経路「%{route}」に設定されているユーザ「%{user} は記事閲覧権がありません。"
+      route_approver_unable_to_approve: "承認経路「%{route}」に設定されているユーザ「%{user}」は記事承認権がありません。"
+      cloned_name: "タイトルに[複製]が含まれています。"
+      invalid_approve_name: "複製後のタイトルを変更し承認申請を行ってください。"
+      user_email_blank: "以下のユーザーがメールアドレスを設定していないため、実行されませんでした。実行するには「メールアドレスが未設定でも実行する。」を選択してください。"
+      forced_update: "メールアドレスが未設定でも実行する。"
+      no_approvers: 承認者がみつかりません。
+
+  tooltip:
+    workflow/addon/approver:
+      workflow_comment:
+        - 申請理由など承認者に対するコメントをを記述してください。
+      workflow_approvers:
+        - 承認者を選択します。
+      workflow_circulations:
+        - 回覧者を選択します。
+        - 回覧者へは承認後に回覧依頼の通知が送られます。
+      approve_remand:
+        - 承認依頼が届いています。申請者に対するコメントを入力（任意）の上、承認または差し戻しを選択してください。
+      workflow_routes:
+        - 承認を申請するには承認経路を選択してから、選択ボタンをクリックしてください。
+      circulation_step:
+        - 確認依頼が届いています。申請者に対するコメントを入力（任意）の上、「確認済みにする」をクリックしてください。
+    workflow/model/route:
+      name:
+        - 承認経路の名前を入力します。
+      pull_up:
+        - 引き上げ承認の有効、無効を設定します。
+      on_remand:
+        - 差し戻し時の動作を選択します。
+        - 「最初に戻る」は、、差し戻し時、承認を最初からやり直します。これが既定の動作です。
+        - 「直前に戻る」は、差し戻し時、直前のレベルからやり直します。
+      approvers:
+        - 承認者を選択します。
+      required_counts:
+        - 必要承認数を入力します。
+        - 「全員」を選択すると、承認者全員の承認が必要となります。
+        - 「n 人」を選択すると、承認者のうち n 人以上の承認が必要となります。
+      circulations:
+        - 回覧者を選択します。
+      group_ids:
+        - この承認経路を利用できるグループを選択します。
+      approver_attachment_uses:
+        - 承認者によるファイル追加を許可する場合は「有効」を、それ以外は「無効」を選択してください。
+      circulation_attachment_uses:
+        - 回覧者によるファイル追加を許可する場合は「有効」を、それ以外は「無効」を選択してください。

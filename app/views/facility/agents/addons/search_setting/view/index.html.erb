@@ -1,0 +1,31 @@
+<% if @cur_node.search_html.present?
+  html = @cur_node.search_html.gsub(/\#\{(.*?)\}/) do |m|
+    if $1 =~ /(keyword|category|service|location)/
+      render file: "_#{$1}"
+    else
+      m
+    end
+  end
+%>
+<%= raw html %>
+<% else %>
+<fieldset class="keyword">
+  <legend><%= t("facility.keyword") %></legend>
+  <%= render file: "_keyword" %>
+</fieldset>
+
+<fieldset class="category">
+  <legend><%= t("facility.category.setting") %></legend>
+  <%= render file: "_category" %>
+</fieldset>
+
+<fieldset class="service">
+  <legend><%= t("facility.service.setting") %></legend>
+  <%= render file: "_service" %>
+</fieldset>
+
+<fieldset class="location">
+  <legend><%= t("facility.location.setting") %></legend>
+  <%= render file: "_location" %>
+</fieldset>
+<% end %>

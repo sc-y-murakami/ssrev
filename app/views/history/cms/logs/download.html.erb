@@ -1,0 +1,31 @@
+<%= form_for :item, url: { action: :download }, html: { method: :post } do |f| %>
+<%= error_messages_for :item %>
+
+<section class="main-box">
+  <header><h2><%= t "ss.download" %></h2></header>
+
+  <dl class="see">
+    <dt><%= @item.t :save_term %><%= @model.tt :save_term %></dt>
+    <dd><%= f.select :save_term, @item.save_term_options %></dd>
+
+    <% if @ss_mode == :cms %>
+      <dt><%= @model.t :user_ids %></dt>
+      <dd>
+        <%= f.hidden_field "user_ids[]", value: "", class: "hidden-ids" %>
+        <%= link_to t("ss.apis.users.index"), cms_apis_users_path, class: "btn ajax-box" %>
+      </dd>
+      <dd>
+        <table class="index ajax-selected">
+          <thead><tr><th class="name"><%= @cur_user.t :name %></th><th class="deselect"></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </dd>
+    <% end %>
+  </dl>
+</section>
+
+<footer class="send">
+  <%= f.submit t("ss.download"), class: :save %>
+  <%= f.button t("ss.buttons.cancel"), type: :reset, class: 'btn-default', onclick: "location.href='#{url_for(action: :index)}'; return false;" %>
+</footer>
+<% end %>

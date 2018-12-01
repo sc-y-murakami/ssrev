@@ -1,0 +1,24 @@
+.history-backup {
+  th, td {
+    border: $border-gray5;
+    @include mb { 
+      display: block !important;
+      border: none;
+    }
+  }
+  th { font-weight: bold; }
+  td.diff {
+    background-color: #ffc;
+  }
+  td span {
+    &.add {
+      background-color: #cfc;
+    }
+    &.delete {
+      background-color: #fcc;
+    }
+    &.change {
+      background-color: #ffc;
+    }
+  }
+}

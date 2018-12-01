@@ -1,0 +1,19 @@
+<div class="gws-board gws-board-tree">
+  <%= render 'show_topic' %>
+
+  <% if @item.children.present? %>
+  <div class="comments">
+    <%= render partial: 'gws/board/comments/comment', collection: @item.children, locals: { parent: @item, recursion: true } %>
+  </div>
+  <% end %>
+
+  <% if @item.subscribed_users.present? %>
+  <%= render partial: 'gws/board/topics/subscribed_users' %>
+  <% end %>
+  <%= render partial: 'gws/board/topics/browsed' %>
+</div>
+
+<%= jquery do %>
+  var highlighter = new Gws_Elasticsearch_Highlighter();
+  highlighter.render();
+<% end %>

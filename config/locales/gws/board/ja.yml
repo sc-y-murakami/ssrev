@@ -1,0 +1,186 @@
+ja:
+  gws/board:
+    user: ユーザー
+    #descendants_num: コメント数
+    #descendants_updated: 更新日時
+    no_authority: 権限がありません
+    topic:
+      comment: コメント
+      new: 新規作成
+      edit: 編集
+      submit: 投稿
+      update: 更新
+      delete: 削除
+      browsing_state: 通知先
+      browsed_state: 状態
+      browsed: 閲覧
+      list: トピック一覧へ
+      confirm: 削除しますか？
+      browsed_user_info:
+        title: 既読者数
+        format: "%{count} 人 / %{total} 人中"
+        more: 詳しく見る
+      notice:
+        create: トピックを作成しました。
+        update: トピックを更新しました。
+        delete: トピックを削除しました。
+    comment:
+      comment: コメントする
+      created: 投稿日
+      updated: 最終更新日
+      submit: 投稿
+      update: 更新
+      edit: 編集
+      delete: 削除
+      confirm: 削除しますか？
+      notice:
+        create: コメントを投稿しました。
+        update: コメントを更新しました。
+        delete: コメントを削除しました。
+    options:
+      mode:
+        thread: スレッド
+        tree: ツリー
+      permit_comment:
+        allow: 許可する
+        deny: 許可しない
+      browsed_state:
+        read: 既読
+        unread: 未読
+        both: 両方
+      severity:
+        normal: 通常
+        important: 重要
+      subscribed_users_readable_state:
+        admin: 管理権限のみ
+        subscriber: 購読者全員
+    links:
+      back_to_thread: 戻る
+      comment: 返信する
+      categories: カテゴリー
+    errors:
+      denied_comment: コメントの投稿は許可されていません。
+
+  modules:
+    gws/board: 掲示板
+    addons:
+      gws/board/group_setting: 掲示板
+      gws/board/category: カテゴリー
+      gws/board/notify_setting: 通知
+
+  gws_role:
+    read_other_gws_board_posts: 投稿の閲覧（全て）
+    read_private_gws_board_posts: 投稿の閲覧（所有）
+    edit_other_gws_board_posts: 投稿の編集（全て）
+    edit_private_gws_board_posts: 投稿の編集（所有）
+    delete_other_gws_board_posts: 投稿の削除（全て）
+    delete_private_gws_board_posts: 投稿の削除（所有）
+    trash_other_gws_board_posts: 投稿ゴミ箱の管理（全て）
+    trash_private_gws_board_posts: 投稿ゴミ箱の管理（所有）
+    read_other_gws_board_categories: カテゴリーの閲覧（全て）
+    read_private_gws_board_categories: カテゴリーの閲覧（所有）
+    edit_other_gws_board_categories: カテゴリーの編集（全て）
+    edit_private_gws_board_categories: カテゴリーの編集（所有）
+    delete_other_gws_board_categories: カテゴリーの削除（全て）
+    delete_private_gws_board_categories: カテゴリーの削除（所有）
+
+  gws_notification:
+    gws/board/topic:
+      subject: "[更新通知][掲示板] %{name}"
+      text: |
+        「%{name}」が作成または更新されました。
+
+        %{text}
+
+    gws/board/post:
+      subject: "[更新通知][掲示板] %{name}"
+      text: |
+        「%{name}」に投稿がありました。
+
+        %{text}
+
+    gws/board/topic/destroy:
+      subject: "[削除通知][掲示板] %{name}"
+      text: |
+        「%{name}」が削除されました。
+
+    gws/board/post/destroy:
+      subject: "[削除通知][掲示板] %{name}"
+      text: |
+        「%{name}」の投稿が削除されました。
+
+  mongoid:
+    models:
+      gws/board/topic: トピック
+      gws/board/post: 投稿
+      gws/board/category: カテゴリー
+    errors:
+      models:
+        gws/board/category:
+          too_deep: は%{max}階層以下にしてください。
+          not_found_parent: 親カテゴリーが存在しません。
+          found_children: 子カテゴリーが存在します。
+        gws/board/postable:
+          file_size_exceeds_post_limit: 添付ファイルのサイズ（%{size}）が投稿の最大サイズ（%{limit}）を超えました。
+          file_size_exceeds_topic_limit: 添付ファイルの合計サイズ（%{size}）がトピックの最大サイズ（%{limit}）を超えました。
+    attributes:
+      gws/board/postable:
+        name: タイトル
+        created: 投稿日
+        updated: 最終更新日
+        mode: 表示形式
+        permit_comment: コメント
+        severity: 重要度
+        topic_id: トピック
+        parent_id: 親投稿
+        descendants_updated: トピック内更新日時
+        descendants_files_count: トピック内添付ファイル数
+        descendants_total_file_size: トピック内添付ファイル容量
+      gws/addon/board/group_setting:
+        board_new_days: 新着表示期間
+        board_file_size: 添付最大サイズ
+        board_file_size_per_topic: 添付最大サイズ/トピック単位
+        board_file_size_per_post: 添付最大サイズ/投稿単位
+        board_browsed_delay: 既読にするまでの秒数
+        board_files_break: ファイル表示の並び
+        board_links_break: リンク表示の並び
+      gws/board/category:
+        name: カテゴリー名
+      gws/addon/board/category:
+        category_ids: カテゴリー
+      gws/addon/board/notify_setting:
+        notify_state: 通知設定
+        subscribed_users_readable_state: 通知先表示
+      gws/board/browsing_state:
+        browsed_users_hash: 既読ユーザー
+
+  tooltip:
+    gws/board/postable:
+      name:
+        - タイトルを入力します。
+      mode:
+        - 表示形式を選択します。
+      permit_comment:
+        - コメントを許可するかどうかを選択します。
+      severity:
+        - 重要度を選択します。
+    gws/addon/board/group_setting:
+      board_new_days:
+        - 新着表示期間を入力します。
+      board_file_size_per_topic:
+        - トピック単位での添付最大サイズを入力します。
+      board_file_size_per_post:
+        - 投稿単位での添付最大サイズを入力します。
+      board_browsed_delay:
+        - 掲示板を既読にするまでの秒数を入力します。
+      board_files_break:
+        - 添付ファイルの表示の並びを選択します。
+      board_links_break:
+        - 投稿のリンク表示の並びを選択します。
+    gws/board/category:
+      name:
+        - カテゴリー名を入力します。
+
+  job:
+    models:
+      gws/board/trash_purge_job: 掲示板/投稿ゴミ箱の掃除

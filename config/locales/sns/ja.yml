@@ -1,0 +1,16 @@
+ja:
+  modules:
+    sns: SNS
+
+  sns:
+    profile: プロフィール
+    file: ファイル
+    user_file: ユーザーファイル
+    group_file: グループファイル
+    account: アカウント
+    connection: 接続情報
+    file_attach: 添付貼付
+    image_paste: 画像貼付
+    thumb_paste: サムネイル
+    errors:
+      invalid_login: ログインできませんでした。

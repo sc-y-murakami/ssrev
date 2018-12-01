@@ -1,0 +1,51 @@
+<dl class="see">
+  <dt><%= @model.t :name %></dt>
+  <dd><%= @item.name %></dd>
+
+  <dt><%= @model.t :category_id %></dt>
+  <dd><%= tryb { @item.category.name } %></dd>
+
+  <dt><%= @model.t :order %></dt>
+  <dd><%= @item.order %></dd>
+
+  <dt><%= @model.t :minutes_limit %></dt>
+  <dd>
+    <% if @item.min_minutes_limit %>
+    <%= @item.min_minutes_limit.to_s(:delimited) %><%= I18n.t('gws/facility.prompts.minutes') %>
+    <% end %>
+    <% if @item.min_minutes_limit || @item.max_minutes_limit %>
+    〜
+    <% end %>
+    <% if @item.max_minutes_limit %>
+      <%= @item.max_minutes_limit.to_s(:delimited) %><%= I18n.t('gws/facility.prompts.minutes') %>
+    <% end %>
+  </dd>
+
+  <% if @item.max_days_limit %>
+  <dt><%= @model.t :max_days_limit %></dt>
+  <dd><%= @item.max_days_limit.to_s(:delimited) %><%= I18n.t('gws/facility.prompts.days') %></dd>
+    <% end %>
+
+  <% if @item.reservation_start_date.present? %>
+  <dt><%= @model.t :reservation_start_date %></dt>
+  <dd><%= I18n.l(@item.reservation_start_date) %></dd>
+  <% end %>
+
+  <% if @item.reservation_end_date.present? %>
+  <dt><%= @model.t :reservation_end_date %></dt>
+  <dd><%= I18n.l(@item.reservation_end_date) %></dd>
+  <% end %>
+
+  <% if @item.activation_date.present? %>
+  <dt><%= @model.t :activation_date %></dt>
+  <dd><%= tryb { @item.activation_date.strftime("%Y/%m/%d %H:%M") } %></dd>
+  <% end %>
+
+  <% if @item.expiration_date.present? %>
+  <dt><%= @model.t :expiration_date %></dt>
+  <dd><%= tryb { @item.expiration_date.strftime("%Y/%m/%d %H:%M") } %></dd>
+  <% end %>
+
+  <dt><%= @model.t :approval_check_state %></dt>
+  <dd><%= @item.label :approval_check_state %></dd>
+</dl>

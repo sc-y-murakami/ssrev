@@ -1,0 +1,50 @@
+<style>
+#navi .mod-navi h3 { display: none; }
+</style>
+<%= jquery do %>
+  var navi = $('#navi');
+  navi.find('.mod-navi:not(:has(h3))').remove();
+
+  var curr = navi.find('.current').closest('.mod-navi');
+  curr.find('h3').show();
+
+  var mods = navi.find('.mod-navi').not(curr);
+  mods.find('h2').addClass('navi-link').click(function() {
+    $(this).parent().find('h3').slideToggle('fast');
+  });
+<% end %>
+
+<nav class="mod-navi main-features">
+  <h2><%= t "modules.gws" %></h2>
+  <h3><%= link_to t('gws.site_info'), gws_site_path %></h3>
+  <% if Gws::Group.allowed?(:read, @cur_user, site: @cur_site) %>
+    <h3><%= link_to t('mongoid.models.ss/group'), gws_groups_path %></h3>
+  <% end %>
+  <% if Gws::CustomGroup.allowed?(:read, @cur_user, site: @cur_site) %>
+    <h3><%= link_to t('mongoid.models.gws/custom_group'), gws_custom_groups_path %></h3>
+  <% end %>
+  <% if Gws::User.allowed?(:read, @cur_user, site: @cur_site) %>
+    <h3><%= link_to t('mongoid.models.ss/user'), gws_users_path %></h3>
+  <% end %>
+  <% if Gws::UserTitle.allowed?(:read, @cur_user, site: @cur_site) %>
+    <h3><%= link_to t('mongoid.models.ss/user_title'), gws_user_titles_path %></h3>
+  <% end %>
+  <% if Gws::Role.allowed?(:read, @cur_user, site: @cur_site) %>
+    <h3><%= link_to t('mongoid.models.gws/role'), gws_roles_path %></h3>
+  <% end %>
+  <% if Gws::Link.allowed?(:read, @cur_user, site: @cur_site) %>
+    <h3><%= link_to t('mongoid.models.gws/link'), gws_links_path %></h3>
+  <% end %>
+  <% if Gws::Contrast.allowed?(:read, @cur_user, site: @cur_site) %>
+    <h3><%= link_to t('mongoid.models.gws/contrast'), gws_contrasts_path %></h3>
+  <% end %>
+  <% if Gws::Chorg::Revision.allowed?(:read, @cur_user, site: @cur_site) %>
+    <h3><%= link_to t('modules.gws/chorg'), gws_chorg_main_path %></h3>
+  <% end %>
+  <% if Gws::History.allowed?(:read, @cur_user, site: @cur_site) %>
+    <h3><%= link_to t('mongoid.models.gws/history'), gws_histories_path %></h3>
+  <% end %>
+  <% if Gws::Job::Log.allowed?(:read, @cur_user, site: @cur_site) %>
+    <h3><%= link_to t('modules.gws/job'), gws_job_logs_path %></h3>
+  <% end %>
+</nav>

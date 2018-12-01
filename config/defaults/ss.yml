@@ -1,0 +1,27 @@
+# ss
+
+production: &production
+  # Application name
+  application_name: SHIRASAGI
+
+  # Application Logo html
+  application_logo_html: '<div class="ss-logo-wrap"><img src="/assets/img/logo.png" alt="SHIRASAGI"><span class="ss-logo-application-name">SHIRASAGI</span></div>'
+
+  # StyleSheets on management pages.
+  stylesheets: ["ss/style"]
+
+  # JavaScripts on management pages.
+  javascripts: ["ss/script"]
+
+  session:
+    key: '_ss_session'
+    # uncomment blow setting if you have been running SHIRASAGI with full https
+    # secure: true
+
+test:
+  <<: *production
+  disable: false
+
+development:
+  <<: *production
+  disable: false

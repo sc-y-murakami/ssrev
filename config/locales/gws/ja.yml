@@ -1,0 +1,551 @@
+ja:
+  gws:
+    group: グループ
+    category: カテゴリー
+    portal: ポータル
+    site_config: 設定
+    site_info: 組織情報
+    user_setting: ポータル設定
+    organization_addresses: 組織アドレス帳
+    question_management: 質問管理
+    default_contrast: 既定のコントラスト
+    roles:
+      admin: 管理者
+      user: 一般ユーザー
+    history:
+      mode:
+        create: 登録
+        update: 変更
+        delete: 削除
+        login: ログイン
+      user:
+        create: 作成者
+        update: 更新者
+        delete: 削除者
+      severity:
+        error: エラー
+        warn: 警告
+        info: 重要情報
+        notice: 一般情報
+        none: 出力しない
+      days:
+        next_day: 翌日
+        prev_day: 前日
+        today: 今日
+      system_default_save_days: システム既定
+      system_default_severity: システム既定
+    member_log:
+      copy_users: 件のユーザーをコピーしました。
+      paste_users: 件のユーザーを追加しました。
+      copy_groups: 件のグループをコピーしました。
+      paste_groups: 件のグループを追加しました。
+    apis:
+      facilities:
+        index: 設備を選択する
+      categories:
+        index: カテゴリーを選択する
+        parent_id: 親カテゴリー
+      custom_groups:
+        index: カスタムグループを選択する
+      user_titles:
+        index: 役職を選択する
+    options:
+      severity:
+        high: 重要なお知らせ
+      input_type:
+        text_field: テキストボックス
+        text_area: テキストエリア
+        email_field: メールアドレス
+        date_field: 日付
+        radio_button: ラジオボタン選択
+        select: プルダウン選択
+        check_box: チェックボックス選択
+        upload_file: ファイル投稿
+      user_form_state:
+        closed: 使用しない
+        public: 使用する
+      readable_setting_range:
+        public: 全公開
+        select: 選択範囲
+        private: 非公開
+      notification:
+        disabled: 通知しない
+        enabled: 通知する
+      break:
+        vertically: 縦並び
+        horizontal: 横並び
+
+    links:
+      back_to_portal: ポータルへ戻る
+    buttons:
+      unset: 解除
+      add_item: 新しい要素を追加
+    confirm:
+      readable_setting:
+        empty: 閲覧者が入力されていません。\n全員に表示されますがよろしいですか？
+    notice:
+      delay_download_with_message: |-
+        ファイル数が多い、またはファイル容量が大きいためバックグランドでファイルを準備します。
+        ダウンロードの準備ができましたらメッセージでお知らせします。
+      contrast_changed: 'コントラストを「%{name}」に変更しました。'
+    errors:
+      allowed_domains_only_root: はルートグループにのみ設定できます。
+
+  date:
+    formats:
+      gws_long: ! '%Y年 %1m月%1d日 (%a)'
+  time:
+    formats:
+      gws_long: ! '%Y年 %1m月%1d日 (%a) %1H:%M'
+      gws_time: ! '%1H:%M'
+
+  gws_role:
+    edit_gws_groups: グループの管理
+    edit_gws_users: ユーザの管理
+    edit_gws_user_titles: 役職の管理
+    edit_gws_roles: 権限/ロールの管理
+    edit_gws_user_forms: ユーザ拡張情報の管理
+    read_gws_histories: 操作履歴の閲覧
+    delete_gws_histories: 操作履歴の削除
+    read_other_gws_custom_groups: カスタムグループの閲覧（全て）
+    read_private_gws_custom_groups: カスタムグループの閲覧（所有）
+    edit_other_gws_custom_groups: カスタムグループの編集（全て）
+    edit_private_gws_custom_groups: カスタムグループの編集（所有）
+    delete_other_gws_custom_groups: カスタムグループの削除（全て）
+    delete_private_gws_custom_groups: カスタムグループの削除（所有）
+    read_other_gws_links: リンク集の閲覧（全て）
+    read_private_gws_links: リンク集の閲覧（所有）
+    edit_other_gws_links: リンク集の編集（全て）
+    edit_private_gws_links: リンク集の編集（所有）
+    delete_other_gws_links: リンク集の削除（全て）
+    delete_private_gws_links: リンク集の削除（所有）
+    edit_gws_contrasts: コントラストの管理
+
+  modules:
+    gws: 標準機能
+    addons:
+      gws/role: 権限/ロール
+      gws/group_permission: 管理権限
+      gws/file: ファイル
+      gws/release: 公開設定
+      gws/history: 変更履歴
+      gws/share/history: 変更履歴
+      gws/readable_setting: 閲覧権限
+      gws/member: 参加者
+      gws/subscription_setting: 購読
+      gws/contributor: 投稿者
+      gws/custom_field: 入力項目
+      gws/edit_lock: 排他制御
+      gws/schedules: スケジュール
+      gws/system/file_setting: ファイル設定
+      gws/system/group_setting: システム設定
+      gws/system/menu_setting: メニュー設定
+      gws/system/log_setting: ログ設定
+      gws/user/custom_form: 拡張情報
+      gws/user/public_duty: 事務分掌
+      gws/link: リンク
+
+  mongoid:
+    models:
+      gws/category: 汎用カテゴリー
+      gws/group: グループ
+      gws/custom_group: カスタムグループ
+      gws/custom_group_member: カスタムグループメンバー
+      gws/user: ユーザー
+      gws/user_title: 役職
+      gws/role: 権限/ロール
+      gws/link: リンク集
+      gws/share: 共有ファイル
+      gws/history: 操作履歴
+      gws/history_archive_file: アーカイブ
+      gws/user_setting: ユーザー設定
+      gws/user_form: 拡張情報
+      gws/user_form_data: 拡張データ
+      gws/contrast: コントラスト
+    errors:
+      models:
+        gws/contrast:
+          load_error: 読み込みに失敗しました。
+          no_contrasts: 定義がありません。
+        gws/model/folder:
+          not_found_parent: 親フォルダーが存在しません。
+          found_children: 子フォルダーが存在します。
+          not_move_to_parent: 最上位フォルダーに変更することはできません。
+          not_move_to_under_other_parent: 最上位のフォルダーをまたいでフォルダーを移動することはできません。
+          not_create_same_folder: フォルダーは既に存在しているか、閲覧権限の無い同名のフォルダーが存在しています。
+          not_move_to_same_name_folder: 移動先にフォルダーは既に存在しているか、閲覧権限の無い同名のフォルダーが存在しています。
+          invalid_chars_as_name: "には次の文字は使えません: \\ / : * ? \" < > |"
+    attributes:
+      gws/model/category:
+        model: モデル
+        state: 状態
+        name: 種別名
+        color: 表示色
+        order: 並び順
+        bg_color: 背景色
+        text_color: 文字色
+      gws/model/file:
+        in_file: ファイル
+        in_files: ファイル
+        image: 画像
+        download: ダウンロード
+        model: モデル
+        state: 状態
+        name: ファイル名
+        filename: ファイル名（英数）
+        size: ファイルサイズ
+        content_type: コンテンツタイプ
+        resizing: リサイズ
+        geo_location: 緯度・経度
+        memo: 補足情報
+      gws/model/folder:
+        name: フォルダー名
+        depth: 階層
+        order: 並び順
+        state: 状態
+        in_basename: フォルダー名
+        in_parent: 親フォルダー
+      gws/user:
+        gws_main_group_ids: グループ（主）
+        gws_default_group_ids: グループ（既定）
+      gws/custom_group:
+        name: グループ名
+        order: 表示順
+      gws/link:
+        name: タイトル
+      gws/history:
+        session_id: セッションID
+        request_id: リクエストID
+        severity: 重要度
+        name: 名称
+        mode: 区分
+        model: モデル
+        controller: コントローラー
+        job: ジョブ
+        mode_name: 区分名
+        model_name: モデル名
+        controller_name: コントローラー名
+        job_name: ジョブ名
+        item_id: 項目ID
+        path: URL
+        action: アクション
+        message: メッセージ
+        updated_fields: 変更箇所
+        updated_field_names: 変更箇所
+        user_name: ユーザー
+        user_tel: 電話番号
+        created: 変更日時
+      gws/share/history:
+        created: 変更日時
+        mode: 区分
+        user_name: ユーザー
+        user_tel: 電話番号
+        updated_fields: 変更内容
+        uploadfile_name: ファイル名
+        uploadfile_size: サイズ
+        upload: 添付
+      gws/reference/user:
+        user_id: 作成者
+        user_uid: 作成者(UID)
+        user_name: 作成者(氏名)
+        user_tel: 電話番号
+        user_group_id: 作成者(グループ)
+        user_group_name: 作成者(グループ名)
+      gws/reference/site:
+        site_id: 組織
+      gws/export:
+        in_file: ファイル
+      gws/addon/file:
+        file_ids: ファイル
+      gws/addon/role:
+        gws_role_ids: ロール
+      gws/addon/permission:
+        group_ids: 管理グループ
+        permission_level: 権限レベル
+      gws/group_permission:
+        group_ids: 管理グループ
+        groups_hash: 管理グループ(ハッシュ)
+        user_ids: 管理ユーザー
+        users_hash: 管理ユーザー(ハッシュ)
+        custom_group_ids: 管理カスタムグループ
+        custom_groups_hash: 管理カスタムグループ(ハッシュ)
+        permission_level: 権限レベル
+      gws/addon/release:
+        released: 公開日時
+        release_date: 公開開始日時(予約)
+        close_date: 公開終了日時(予約)
+      gws/addon/readable_setting:
+        readable_setting_range: 公開範囲
+        readable_group_ids: 閲覧グループ
+        readable_groups_hash: 閲覧グループ(ハッシュ)
+        readable_member_ids: 閲覧ユーザー
+        readable_members_hash: 閲覧ユーザー(ハッシュ)
+        readable_custom_group_ids: 閲覧カスタムグループ
+        readable_custom_groups_hash: 閲覧カスタムグループ(ハッシュ)
+      gws/member:
+        member_ids: 参加ユーザー
+        member_group_ids: 参加グループ
+        member_custom_group_ids: 参加カスタムグループ
+      gws/addon/link/feature:
+        links/name: 表示名
+        links/url: URL
+      gws/addon/system/file_setting:
+        multibyte_filename_state: 日本語ファイル名
+      gws/addon/system/group_setting:
+        sender_user_id: 差出ユーザー
+        sendmail_domains: メール送信許可ドメイン
+        canonical_scheme: グループウェアスキーム
+        canonical_domain: グループウェアドメイン
+      gws/addon/system/menu_setting:
+        menu_portal_label: ポータルの表示
+        menu_portal_state: ポータルの表示
+        menu_schedule_label: スケジュールの表示
+        menu_schedule_state: スケジュールの表示
+        menu_todo_label: ToDoの表示
+        menu_todo_state: ToDoの表示
+        menu_reminder_label: リマインダーの表示
+        menu_reminder_state: リマインダーの表示
+        menu_attendance_label: 出退勤の表示
+        menu_attendance_state: 出退勤の表示
+        menu_bookmark_label: お気に入りの表示
+        menu_bookmark_state: お気に入りの表示
+        menu_memo_label: メッセージの表示
+        menu_memo_state: メッセージの表示
+        menu_board_label: 掲示板の表示
+        menu_board_state: 掲示板の表示
+        menu_faq_label: よくある質問の表示
+        menu_faq_state: よくある質問の表示
+        menu_qna_label: Ｑ＆Ａの表示
+        menu_qna_state: Ｑ＆Ａの表示
+        menu_workflow_label: ワークフローの表示
+        menu_workflow_state: ワークフローの表示
+        menu_report_label: レポートの表示
+        menu_report_state: レポートの表示
+        menu_circular_label: 回覧板の表示
+        menu_circular_state: 回覧板の表示
+        menu_monitor_label: 照会・回答の表示
+        menu_monitor_state: 照会・回答の表示
+        menu_survey_label: アンケートの表示
+        menu_survey_state: アンケートの表示
+        menu_share_label: 共有ファイルの表示
+        menu_share_state: 共有ファイルの表示
+        menu_shared_address_label: 共有アドレス帳の表示
+        menu_shared_address_state: 共有アドレス帳の表示
+        menu_personal_address_label: 個人アドレス帳の表示
+        menu_personal_address_state: 個人アドレス帳の表示
+        menu_staff_record_label: 電子職員録の表示
+        menu_staff_record_state: 電子職員録の表示
+        menu_links_label: リンク集の表示
+        menu_links_state: リンク集の表示
+        menu_elasticsearch_label: 全文検索の表示
+        menu_elasticsearch_state: 全文検索の表示
+        menu_discussion_label: 電子会議室
+        menu_discussion_state: 電子会議室
+        menu_contrast_label: コントラスト
+        menu_contrast_state: コントラスト
+        menu_presence_label: 在席管理の表示
+        menu_presence_state: 在席管理の表示
+      gws/addon/system/log_setting:
+        log_save_days: ログ保持日数
+        log_main_severity: 標準機能のログ
+        log_board_severity: 掲示板のログ
+        log_circular_severity: 回覧板のログ
+        log_elasticsearch_severity: 全文検索のログ
+        log_facility_severity: 設備管理のログ
+        log_faq_severity: よくある質問のログ
+        log_file_severity: 共有ファイルのログ
+        log_memo_severity: メッセージのログ
+        log_monitor_severity: 照会・回答のログ
+        log_personal_address_severity: 個人アドレス帳のログ
+        log_portal_severity: ポータルのログ
+        log_qna_severity: Ｑ＆Ａのログ
+        log_report_severity: レポートのログ
+        log_schedule_severity: スケジュールのログ
+        log_share_severity: 共有ファイルのログ
+        log_shared_address_severity: 共有アドレス帳のログ
+        log_staff_record_severity: 電子職員録のログ
+        log_workflow_severity: ワークフローのログ
+        log_chorg_severity: 組織変更のログ
+        log_discussion_severity: 電子会議室のログ
+      gws/addon/subscription_setting:
+        subscribed_group_ids: 購読グループ
+        subscribed_groups_hash: 購読グループ(ハッシュ)
+        subscribed_member_ids: 購読ユーザー
+        subscribed_members_hash: 購読ユーザー(ハッシュ)
+        subscribed_custom_group_ids: 購読カスタムグループ
+        subscribed_custom_groups_hash: 購読カスタムグループ(ハッシュ)
+      gws/addon/contributor:
+        contributor_model: 投稿者（モデル）
+        contributor_id: 投稿者（データID）
+        contributor_name: 投稿者名
+      gws/addon/custom_field:
+        tooltips: ツールチップ
+        input_type: 入力形式
+        select_options: 選択肢
+        required: 必須入力
+        max_length: 最大文字数
+        place_holder: 初期表示
+        additional_attr: 追加属性
+        input_confirm: 入力確認
+        upload_file_count: アップロードファイル数
+        max_upload_file_size: 最大ファイルサイズ設定
+        resizing: 画像リサイズ
+        resizing_width: 画像リサイズ（幅）
+        resizing_height: 画像リサイズ（高さ）
+      gws/addon/edit_lock:
+        lock_owner: 所有者
+        lock_owner_id: ロック所有者
+        lock_until: ロック期限
+      gws/addon/schedules:
+        schedule_ids: スケジュール
+      gws/addon/import/user:
+        in_file: ファイル
+      gws/user_form:
+        state: 使用
+        memo: メモ
+      gws/user_form_data:
+        form_id: 拡張情報
+        column_values: 拡張データ
+      gws/addon/user/public_duty:
+        charge_name: 担当名
+        charge_tel: 担当電話
+        charge_address: 担当住所
+        divide_duties: 分掌事務
+      gws/contrast:
+        name: 名前
+        order: 並び順
+        status: ステータス
+        text_color: 文字色
+        color: 背景色
+      gws/addon/import/group:
+        in_file: ファイル
+      gws/addon/import/role:
+        in_file: ファイル
+      gws/addon/link:
+        links: リンク
+
+  tooltip:
+    gws/model/category:
+      name:
+        - 種別名を入力します。
+      color:
+        - 表示色を入力します。
+        -
+        - 表示色は "#RRGGBB" 形式で入力します（RR, GG, BB はそれぞれ赤、緑、青の成分を16進数で入力）。
+      order:
+        - 並び順を入力します。
+        - 数字が小さいほど上位に表示されます。
+    gws/model/file:
+      in_file:
+        - ファイルを選択します。
+      name:
+        - ファイル名を入力します。
+      filename:
+        - ファイル名（英数）を入力します。
+      geo_location:
+        - 緯度・経度を10進で入力します。
+      memo:
+        - 補足情報を入力します。
+    gws/user:
+      gws_main_group_ids:
+        - ユーザーの所属する主なグループを選択します。
+    gws/custom_group:
+      name:
+        - グループ名を入力します。
+      order:
+        - 表示順を入力します。
+        - 数字が小さいほど上位に表示されます。
+      member_ids:
+        - 参加者を選択します。
+    gws/addon/role:
+      gws_role_ids:
+        - ロールを選択します。
+    gws/link:
+      name:
+        - タイトルを入力します。
+    gws/addon/system/group_setting:
+      sender_user_id:
+        - 差出ユーザーを選択します。
+        - 掲示板の新着投稿通知などの差出人として使用されます。
+      sendmail_domains:
+        - メール送信許可ドメインを入力します。
+      canonical_scheme:
+        - グループウェアスキームを選択します。
+        - システムからメールを送信する際、メールに記載される URL がここで設定したスキームになります。
+      canonical_domain:
+        - グループウェアドメインを入力します。
+        - システムからメールを送信する際、メールに記載される URL がここで設定したドメインになります。
+    gws/addon/group_permission:
+      custom_group_ids:
+        - 編集を許可するカスタムグループを選択します。
+    gws/addon/readable_setting:
+      readable_setting_range:
+        - <b>全公開</b> - 誰でも閲覧できます。
+        - <b>選択範囲</b> - 選択した対象のみ閲覧できます。
+        - <b>非公開</b> - 作成者のみ閲覧できます。
+      readable_custom_group_ids:
+        - 閲覧を許可するカスタムグループを選択します。
+      readable_group_ids:
+        - 閲覧を許可するグループを選択します。
+      readable_member_ids:
+        - 閲覧を許可するユーザーを選択します。
+    gws/addon/subscription_setting:
+      subscribed_custom_group_ids:
+        - このページを購読するカスタムグループを選択します。
+      subscribed_group_ids:
+        - このページを購読するグループを選択します。
+      subscribed_member_ids:
+        - このページを購読するユーザーを選択します。
+    gws/addon/contributor:
+      contributor_name:
+        - 投稿者名を選択します。
+    gws/addon/schedules:
+      schedule_ids:
+        - スケジュールを選択します。
+    gws/addon/import/user:
+      in_file:
+        - CSVファイルを指定しユーザーのインポートを行います。
+        - idが記述されていない行は新規作成になります。
+    gws/user_form:
+      state:
+        - ユーザー拡張情報を使用するかしないかを選択します。
+      memo:
+        - 備考を入力します。
+        - 備考は他の場所に表示されませんので管理目的のメモなどを入力します。
+    gws/addon/user/public_duty:
+      charge_name: 担当を入力します。
+      charge_tel: 担当電話を入力します。
+      charge_address: 担当住所・電話を入力します。
+      divide_duties: 事務分掌を入力します。
+    gws/contrast:
+      name:
+        - 名前を入力します。
+      order:
+        - 並び順を入力します。
+        - 数字が小さいほど上位に表示されます。
+      state:
+        - 公開、非公開を選択します。
+      text_color:
+        - 文字色を選択します。
+      color:
+        - 背景色を選択します。
+    gws/model/folder:
+      name:
+        - フォルダー名を入力します。
+        - 'フォルダー名には次の文字は使えません: \ / : * ? " < > |'
+      order:
+        - 並び順を入力します。
+      in_parent:
+        - 親フォルダーを選択してください。
+
+  activemodel:
+    models:
+      gws/user_csv/importer: ユーザCSVインポート
+    attributes:
+      gws/user_csv/importer:
+        in_file: ファイル
+
+  job:
+    models:
+      gws/history_archive_job: 操作履歴アーカイブ作成
+      gws/compress_job: ファイル/圧縮ダウンロード

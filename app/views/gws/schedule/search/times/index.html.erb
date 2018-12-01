@@ -1,0 +1,71 @@
+<%= jquery do %>
+Gws_Schedule_Multiple_Calendar.renderController('#calendar-controller');
+
+$(".gws-schedule-search-times-result .hour-wrap").on({
+  mouseenter: function(){
+    var plan = $(this).data("plan");
+    if (plan) {
+      var user_name = "";
+      user_name += '<p>' + plan["user_section_name"] + '<\p>';
+      user_name += '<p>' + plan["user_long_name"] + '<\p>';
+      $(this).append('<div class="user-tooltip">' + user_name + '</div>');
+    }
+  },
+  mouseleave: function(){
+    $(this).find(".user-tooltip").remove();
+  }
+});
+<% end %>
+
+<%= render "gws/schedule/search/main/tabs" %>
+
+<section class="main-box gws-schedule-box gws-schedule-search">
+  <%= render "search" %>
+
+  <% if @items.present? %>
+  <div class="gws-schedule-search-hr"></div>
+  <div class="gws-schedule-search-times-result">
+    <% @items.each do |date, hours| %>
+
+      <% if @time_search.facilities.blank? %>
+      <%# next if hours[0].blank? %>
+      <div class="date <%= date.strftime('%a').downcase %>">
+        <p class="label"><%= l date, format: :full %></p>
+
+        <% @time_search.hours.each do |hour| %>
+          <span class="hour-wrap">
+          <% if hours[0].index(hour) %>
+            <% link_params = @time_search.link_params(start: date.strftime("%Y-%m-%dT#{hour}:00")) %>
+            <%= link_to hour, new_gws_schedule_plan_path(link_params), class: "hour free" %>
+          <% else %>
+            <span class="hour"><%= hour %></span>
+          <% end %>
+          </span>
+        <% end %>
+      </div>
+      <% end %>
+
+      <% @time_search.facilities.each do |facility| %>
+      <%# next if hours[1][facility.id].blank? %>
+      <div class="date <%= date.strftime('%a').downcase %>">
+        <p class="label"><%= l date, format: :full %></p>
+        <p class="facility"><%= facility.name %></p>
+        <% @time_search.hours.each do |hour| %>
+
+          <% data_plan = hours[2].dig(facility.id, hour) %>
+          <span class="hour-wrap" data-plan="<%= data_plan ? data_plan.to_json : "" %>">
+          <% if (hours[1][facility.id] || []).index(hour) %>
+            <% link_params = @time_search.link_params(start: date.strftime("%Y-%m-%dT#{hour}:00")) %>
+            <% link_params[:facility_ids] = [facility.id] %>
+            <%= link_to hour, new_gws_schedule_plan_path(link_params), class: "hour free" %>
+          <% else %>
+            <span class="hour exist"><%= hour %></span>
+          <% end %>
+          </span>
+        <% end %>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+  <% end %>
+</section>

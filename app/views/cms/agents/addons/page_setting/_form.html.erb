@@ -1,0 +1,18 @@
+<%= jquery do %>
+  SS_AddonTabs.hide(".mod-cms-page-setting");
+<% end %>
+<dl class="see mod-cms-page-setting">
+  <dl class="see">
+    <dt><%= @model.t :auto_keywords %><%= @model.tt :auto_keywords %></dt>
+    <dd><%= f.select :auto_keywords, @item.auto_keywords_options %></dd>
+
+    <dt><%= @model.t :keywords %><%= @model.tt :keywords %></dt>
+    <dd><%= f.text_field :keywords %></dd>
+
+    <dt><%= @model.t :auto_description %><%= @model.tt :auto_description %></dt>
+    <dd><%= f.select :auto_description, @item.auto_description_options %></dd>
+
+     <dt><%= @model.t :max_name_length %><%= @model.tt :max_name_length %></dt>
+    <dd><%= f.select :max_name_length, @item.max_name_length_options %></dd>
+  </dl>
+</dl>

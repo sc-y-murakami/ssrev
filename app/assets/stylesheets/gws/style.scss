@@ -1,0 +1,186 @@
+/**
+ *= require gridster/jquery.gridster.min.css
+ */
+@import "ss/init";
+@import "board/gws";
+@import "facility/gws";
+@import "schedule/gws";
+@import "circular/gws";
+@import "memo/gws";
+@import "portal/gws";
+@import "discussion/gws";
+@import "monitor/gws";
+@import "attendance/gws";
+@import "reminder/gws";
+@import "presence/gws";
+@import "survey/gws";
+@import "workflow/gws";
+
+// File
+.gws-addon-file {
+  .upload-menu-select {
+    display: none;
+    float: right;
+  }
+  .action-attach, .action-paste, .action-thumb {
+    display: none !important;
+  }
+}
+
+.gws-list-item--deleted {
+  .title {
+    color: #888;
+  }
+}
+
+// Category
+.gws-category-navi {
+  margin-bottom: 10px;
+  cursor: auto;
+  .dropdown-menu {
+    min-width: 220px;
+  }
+  .depth-1 {
+    padding-left: 20px;
+  }
+  .link-item {
+    display: inline-block;
+    padding: 8px 10px;
+    color: #333;
+  }
+  .link-item:hover {
+    background-color: $gray1;
+    color: #f25a38;
+    text-decoration: none;
+  }
+  .depth-0 .link-item {
+    display: block;
+  }
+  .depth-1 .link-item {
+    border-radius: 3px;
+  }
+  .separator {
+    display: none;
+  }
+  @include mb {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+.gws-category-label {
+  display: inline-block;
+  padding: 1px 5px;
+  @include border-radius(3px);
+  background-color: #e8e8e8;
+  background-image: url(/assets/img/gws/bg-plan.png);
+  color: #444;
+  font-size: 90%;
+  font-weight: normal;
+}
+a.gws-category-label:hover {
+  //opacity: 0.85;
+}
+.gws-category-label-open {
+  background-color: #05c;
+  color: #fff;
+}
+.gws-category-label-resolved {
+  background-color: #083;
+  color: #fff;
+}
+.gws-category-tree, .gws-category-tree-view {
+  ul.depth0 {
+    margin-top: 10px;
+    li {
+      display: inline;
+      label, a {
+        display: inline-block;
+        margin: 0 5px 10px 0;
+      }
+    }
+    ul {
+      padding-left: 40px;
+    }
+  }
+  span.depth0 {
+    display: block;
+  }
+}
+.gws-category-tree-view {
+  ul.depth0 {
+    font-size: 115%;
+  }
+  span.depth0 {
+    margin: 10px 0 20px;
+    border-bottom: solid 1px $gray5;
+    font-size: 110%;
+  }
+  ul.depth1 {
+    margin-bottom: 20px;
+  }
+}
+
+// Member
+.gws-member-log {
+  margin-left: 10px;
+  color: #080;
+}
+
+// Popup (tooltip)
+.gws-popup {
+  position: absolute;
+  width: 400px;
+  padding: 10px;
+  border-radius: 4px;
+  @include box-shadow(0 1px 6px #666);
+  background-color: #fff;
+  z-index: 200;
+  &:after {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #bbb;
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    margin-left: -10px;
+  }
+  &.top:after {
+    border-top-color: transparent;
+    border-bottom: 10px solid #bbb;
+    top: -20px;
+    bottom: auto;
+  }
+  &.left:after {
+    left: 10px;
+    margin: 0;
+  }
+  &.right:after {
+    right: 10px;
+    left: auto;
+    margin: 0;
+  }
+}
+
+// Dropdown
+.gws-dropdown-menu {
+  left: -4px;
+  max-height:300px;
+  overflow-y: scroll;
+  margin: 0;
+  padding: 4px;
+  border: $border-gray4;
+  @include box-shadow(0px 3px 12px rgba(0,0,0,.2));
+  background: $white;
+  white-space: nowrap;
+}
+
+// Readable Setting
+.gws-addon-readable-setting-select {
+  display: none;
+  margin: 15px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}

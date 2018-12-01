@@ -1,0 +1,20 @@
+<% parent = params[:controller].split('/').last %>
+<% @item_menu_proc = proc do |item| %>
+  <% if item.member?(@cur_user) %>
+    <%= link_to t('gws/board.links.comment'), new_gws_circular_comment_path(parent: parent, post_id: item), class: 'btn' %>
+  <% end %>
+  <% if item.member?(@cur_user) %>
+    <%= link_to item.see_action_label(@cur_user), toggle_seen_gws_circular_post_path, method: :post, class: "btn #{'gws-btn-pushed' if item.seen?(@cur_user)}" %>
+  <% end %>
+<% end %>
+
+<% @comment_menu_proc = proc do |item, comment| %>
+  <% if comment.allowed?(:edit, @cur_user, site: @cur_site) %>
+    <%= link_to t('ss.links.edit'), edit_gws_circular_comment_path(parent: parent, post_id: item, id: comment), class: 'btn' %>
+  <% end %>
+  <% if comment.allowed?(:delete, @cur_user, site: @cur_site)  %>
+    <%= link_to t('ss.links.delete'), delete_gws_circular_comment_path(parent: parent, post_id: item, id: comment), class: 'btn' %>
+  <% end %>
+<% end %>
+
+<%= render file: 'gws/circular/main/show' %>

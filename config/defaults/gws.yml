@@ -1,0 +1,167 @@
+# gws
+
+production: &production
+  # Disable GWS.
+  disable: false
+
+  # Disable navigation
+  disable_navi: false
+
+  # StyleSheets on gws pages.
+  stylesheets: ["gws/style"]
+
+  # JavaScripts on gws pages.
+  javascripts: ["gws/script"]
+
+  history:
+    save_days: 90
+    severity: info
+    severity_notice: disabled
+
+  apis:
+    users:
+      # 初期表示グループ / user_group, root_group
+      default_group: user_group
+
+  portal:
+    # Default user portlets
+    # - model: portlet model (required)
+    #   name: portlet name
+    #   limit: items size
+    #   category_id: category id
+    #   grid:
+    #     col: position x (1..4)
+    #     row: position y (1..n)
+    #     size_x: width (1..4)
+    #     size_y: height (1..4)
+    #   reminder_filter: future or all
+    user_portlets:
+      - model: schedule
+        grid:
+          col: 1
+          row: 1
+          size_x: 4
+          size_y: 2
+      - model: presence
+      - model: reminder
+        reminder_filter: future
+      - model: monitor
+      - model: circular
+      - model: board
+      - model: faq
+      - model: qna
+
+    # Default group portlets
+    group_portlets:
+      - model: schedule
+      - model: monitor
+      - model: board
+      - model: faq
+      - model: qna
+
+  chorg:
+    models:
+      - "Gws::Board::Category"
+      - "Gws::Board::Post"
+      - "Gws::Circular::Category"
+      - "Gws::Circular::Post"
+      - "Gws::CustomGroup"
+      - "Gws::Facility::Category"
+      - "Gws::Facility::Item"
+      - "Gws::Faq::Category"
+      - "Gws::Faq::Post"
+      - "Gws::Link"
+      - "Gws::Memo::Comment"
+      - "Gws::Memo::Filter"
+      - "Gws::Memo::Folder"
+      - "Gws::Memo::Message"
+      - "Gws::Monitor::Category"
+      - "Gws::Monitor::Post"
+      - "Gws::Notice::Category"
+      - "Gws::Notice::Post"
+      - "Gws::Portal::GroupPortlet"
+      - "Gws::Portal::GroupSetting"
+      - "Gws::Portal::UserPortlet"
+      - "Gws::Portal::UserSetting"
+      - "Gws::Qna::Category"
+      - "Gws::Qna::Post"
+      - "Gws::Reminder"
+      - "Gws::Report::Category"
+      - "Gws::Report::File"
+      - "Gws::Report::Form"
+      - "Gws::Schedule::Category"
+      - "Gws::Schedule::Comment"
+      - "Gws::Schedule::Holiday"
+      - "Gws::Schedule::Plan"
+      - "Gws::Schedule::PlanSearch"
+      - "Gws::Schedule::Todo"
+      - "Gws::Share::Category"
+      - "Gws::Share::File"
+      - "Gws::Share::Folder"
+      - "Gws::Share::History"
+      - "Gws::SharedAddress::Address"
+      - "Gws::SharedAddress::Group"
+      - "Gws::StaffRecord::Group"
+      - "Gws::StaffRecord::Seating"
+      - "Gws::StaffRecord::User"
+      - "Gws::StaffRecord::Year"
+      - "Gws::UserFormData"
+      - "Gws::UserTitle"
+      - "Gws::Workflow::File"
+      - "Gws::Workflow::Form"
+      - "Gws::Workflow::Route"
+    exclude_fields:
+      - "filename"
+      - "state"
+      - "/_state$/"
+      - "md5"
+      - "route"
+      - "/_route$/"
+      - "workflow_state"
+      - "workflow_comment"
+      - "url"
+      - "/_url$/"
+    ids_fields:
+      - "_id"
+      - "id"
+    max_division: 3
+
+  attendance:
+    max_break: 3
+
+  memo:
+    disable_unsend: true
+    disable_mail_forward: false
+
+  popup_notice:
+    # Default search condition in popup / unseen, seen
+    search_condition: unseen
+
+  notice:
+    default_notice_total_body_size_limit: 31_457_280
+    default_notice_individual_file_size_limit: 10_485_760
+    default_notice_total_file_size_limit: 31_457_280
+    portal_browsed_state: unread
+
+  # Default state and style label in user presence
+  presence:
+    state:
+      - available: 在席
+      - unavailable: 離席
+      - leave: 退社
+      - dayoff: 休み
+      - '': 未設定
+    style:
+      available: active
+      unavailable: inactive
+      leave: none
+      dayoff: none
+      '': none
+
+test:
+  <<: *production
+  disable: false
+
+development:
+  <<: *production
+  disable: false

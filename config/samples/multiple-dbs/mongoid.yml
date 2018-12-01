@@ -1,0 +1,32 @@
+# MongoDB Configuration
+
+production:
+  clients:
+    default:
+      database: ss
+      hosts:
+        - localhost:27017
+
+    # Slave / 投稿用
+    default_post:
+      database: ss_post
+      hosts:
+        - localhost:27018
+
+    # Slave / ログ用
+    repl_master:
+      database: ss
+      hosts:
+        - other:27017
+
+    # Master / 投稿用
+    public:
+      database: ss_post
+      hosts:
+        - other:27018
+
+    # ss_gws_historyへのDB書き込みを別のホスト/データベースへ切り離す設定
+    gws_history:
+      database: ss_gws_history
+      hosts:
+        - otherhost:27018

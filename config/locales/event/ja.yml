@@ -1,0 +1,274 @@
+ja:
+  event:
+    page: イベントページ
+    add_date: 日付フォームを追加する
+    add_repeat_dates: 一括設定
+    del_date: 削除
+    next_month: 次の月へ
+    prev_month: 前の月へ
+    next_day: 次の日へ
+    prev_day: 前の日へ
+    current_month: 今月
+    filter_all: 全て
+    date_range_delimiter: ～
+    keyword: キーワード
+    no_event: イベントはありません
+    dates:
+      setting: 開催期間
+      start_date: 開始
+      close_date: 終了
+    category:
+      setting: カテゴリー
+    search:
+      no-result: 検索結果が見つかりませんでした。
+
+    links:
+      ical_refresh: iCal配信取込
+
+    submit:
+      search: 検索する
+      reset: リセット
+
+    confirm:
+      delete_date: イベント日を削除してよろしいですか？
+
+    options:
+      sort:
+        name: タイトル
+        filename: ファイル名
+        created: 作成日時
+        updated_1: 更新日時
+        released_1: 公開日時
+        order: 指定順
+        event_dates: イベント日
+        unfinished_event_dates: イベント日（未終了）
+        event_dates_today: イベント日(今日)
+        event_dates_tomorrow: イベント日(明日)
+        event_dates_week: イベント日(一週間以内)
+      event_display:
+        list: リスト形式
+        table: 表形式
+        list_only: リスト形式のみ
+        table_only: 表形式のみ
+      ical_refresh_method:
+        manual: 手動
+        auto: 自動
+      ical_sync_method:
+        full: 完全
+        add_only: 追加
+
+    apis:
+      repeat_dates:
+        start: 開始日
+        end: 終了日
+        wdays: 該当曜日
+        days: 該当日
+        add_dates: 追加する
+        start_blank: 開始日を入力してください。
+        end_blank: 終了日を入力してください。
+        not_found_dates: 該当する日付が見つかりませんでした。
+
+    tooltips:
+      file_import:
+        - "CSV形式またはiCal形式のファイルをインポートすることができます。"
+
+  modules:
+    event: イベント
+    addons:
+      event/date: イベント
+      event/calendar_list: リスト表示
+      event/page_list: リスト表示
+      event/body: イベント情報
+      event/ical_import: ical取り込み
+      event/ical_link: iCal情報
+
+  cms:
+    nodes:
+      event/page: イベントリスト
+      event/search: イベント検索
+    parts:
+      event/calendar: カレンダー
+      event/search: イベント検索
+
+  cms_role:
+    read_other_event_pages: ページの閲覧（全て）
+    read_private_event_pages: ページの閲覧（所有）
+    edit_other_event_pages: ページの編集（全て）
+    edit_private_event_pages: ページの編集（所有）
+    delete_other_event_pages: ページの削除（全て）
+    delete_private_event_pages: ページの削除（所有）
+    move_other_event_pages: ページの移動（全て）
+    move_private_event_pages: ページの移動（所有）
+    release_other_event_pages: ページの公開（全て）
+    release_private_event_pages: ページの公開（所有）
+    approve_other_event_pages: ページの承認（全て）
+    approve_private_event_pages: ページの承認（所有）
+    reroute_other_event_pages: ページの承認経路変更（全て）
+    reroute_private_event_pages: ページの承認経路変更（所有）
+    revoke_other_event_pages: ページの承認申請取消（全て）
+    revoke_private_event_pages: ページの承認申請取消（所有）
+
+  mongoid:
+    models:
+      event/page: イベントページ
+      event/search: イベント検索ページ
+    errors:
+      models:
+        event/page:
+          invalid_csv_or_ical: CSV形式のファイルまたはiCal形式のファイルを選択してください。
+          malformed_csv: 未サポートのCSV形式のファイルです。正しいCSV形式のファイルを選択してください。
+          malformed_ical: 未サポートのiCal形式のファイルです。正しいiCal形式のファイルを選択してください。
+    attributes:
+      cms/model/page:
+        event_name: イベントタイトル
+        event_dates: イベント日
+        schedule: 日時
+        venue: 開催場所
+        content: 内容
+        cost: 費用
+        related_url: URL
+        field: 項目名
+        value: 内容
+        contact: お問い合わせ
+        event_keyword: イベント検索ワード
+      event/addon/calendar_list:
+        event_display: 表示形式
+      event/addon/ical_import:
+        ical_import_url: iCal配信URL
+        ical_basic_certs: ベーシック認証
+        ical_basic_user: ベーシック認証ユーザー
+        ical_basic_password: ベーシック認証パスワード
+        ical_max_docs: 最大保存件数
+        ical_refresh_method: 更新方法
+        ical_sync_method: 同期方法
+        ical_page_state: ページステータス
+        ical_import_date_ago: 取り込み制限(過去)
+        ical_import_date_after: 取り込み制限(未来)
+      event/addon/ical_link:
+        ical_uid: ソースID
+        ical_link: ソースURL
+
+  datetime:
+    prompts:
+      wday: 曜日
+
+  errors:
+    messages:
+      too_many_event_dates: "の設定日が多すぎます。%{count} 個以下になるように設定してください。"
+
+  job:
+    models:
+      event/page/import_job: イベントページインポート
+      event/ical/import_job: iCalインポート
+
+  tooltip:
+    event/addon/date:
+      event_name:
+        - イベントページに表示するリンクのタイトルを記入します。
+        - 入力しない場合はこのページのタイトルが継承されます。
+      event_dates:
+        - イベントページにリンクを表示する場合はイベントの期間を入力します。
+        - 「日付フォームを追加する」を選択することで複数の期間を設定することが可能です。
+    event/addon/body:
+      schedule:
+        - イベントの日時をテキスト形式で入力します。
+      venue:
+        - イベントの開催場所を入力します。
+      related_url:
+        - イベントの関連URLを入力します。
+      content:
+        - イベントの内容を入力します。
+      cost:
+        - イベント参加に必要な費用を入力します。
+      contact:
+        - イベントの連絡先を入力します。
+    event/addon/page_list:
+      sort:
+        - どういった順でリストの並べるかを指定します。
+        - タイトル、ファイル名、作成日時、更新日時、公開日時での並び順は昇順です。
+        - 指定順での並び順は降順です
+        - イベント日はイベント日が設定されている項目を古い順に表示します。
+        - イベント日（未終了）は現在の日付よりも新しいイベント日が設定されている項目を古い順に表示します。
+      loop_html:
+        - 自動生成されたリスト表示部分のHTMLを指定することが可能です。
+        - |-
+          下記のように記述します。
+          #{class}　リンク先のファイル名が表示されます。ファイル名に拡張子がある場合、拡張子を除いた部分が表示されます。
+          #{date}　リンク先のページの公開日時が「2015/4/1」の形式で表示されます。
+          #{date.default}　リンク先のページの公開日時が「2015/4/1」の形式で表示されます。
+          #{date.iso}　リンク先のページの公開日時が「2015-04-01」の形式で表示されます。
+          #{date.long}　リンク先のページの公開日時が「2015年4月1日」の形式で表示されます。
+          #{date.short}　リンク先のページの公開日時が「4/1」の形式で表示されます。
+          #{time}　リンク先のページの公開日時が「2015/4/1 12:34」の形式で表示されます。
+          #{time.default}　リンク先のページの公開日時が「2015/4/1 12:34」の形式で表示されます。
+          #{time.iso}　リンク先のページの公開日時が「2015-4-1 12:34」の形式で表示されます。
+          #{time.long}　リンク先のページの公開日時が「2015年4月1日 12時34分」の形式で表示されます。
+          #{time.short}　リンク先のページの公開日時が「15/04/01 12:34」の形式で表示されます。
+          #{url}　リンク先ページのURLが表示されます。
+          #{name}　リンク先ページのタイトルが表示されます。
+          #{index_name}　リンク先ページの一覧用タイトルが表示されます。未設定の場合はタイトルが表示されます。
+          #{summary}　リンク先ページのSummaryが表示されます。
+          #{html}　リンク先ページの本文が表示されます。
+          #{current}　現在訪問しているページとURLが同一の場合、classにcurrentが付与されます。
+          #{new}　リンク先のページ公開日時がNEWマーク期間の範囲内の場合、classにnewが付与されます。
+          #{id}　リンク先のファイルIDが表示されます。
+          #{group}　リンク先ページの所有グループが表示されます。
+          #{groups}　リンク先ページの全ての所有グループが表示されます。
+          #{img.src}　リンク先ページ内に画像が存在する場合、リンク先ページの先頭の画像が表示されます。それ以外の場合、既定のパスが表示されます。
+          #{categories}　リンク先ページ内がカテゴリに関連付けられている場合、リンク先ページのカテゴリリストが表示されます。
+          #{pages.count}　リンク先ページ内にページが存在する場合、リンク先ページ内のページ数が表示されます。
+          #{event_dates} イベント日が「2015/4/1」の形式で表示されます。
+          #{event_dates.default} イベント日が「2015/4/1」の形式で表示されます。
+          #{event_dates.default_full} イベント日が「2015/4/1 (水)」の形式で表示されます。
+          #{event_dates.iso} イベント日が「2015-4-1」の形式で表示されます。
+          #{event_dates.iso_full} イベント日が「2015-4-1 (水)」の形式で表示されます。
+          #{event_dates.long} イベント日が「2015年4月1日」の形式で表示されます。
+          #{event_dates.full} イベント日が「2015年4月1日 (水)」の形式で表示されます。
+          #{tags} リンク先ページのタグが表示されます。
+
+          使用例：
+          &lt;article class="#{class}">
+            &lt;header>
+              &lt;h2>&lt;a href="#{url}">#{name}&lt;/a>&lt;/h2>
+            &lt;/header>
+            &lt;p>#{summary}&lt;/p>
+          &lt;/article>
+    event/addon/calendar_list:
+      event_display:
+        - イベントカレンダーの表示形式を指定します。
+    event/addon/ical_import:
+      ical_import_url:
+        - iCal配信URLを設定します。
+      ical_basic_certs:
+        - iCal配信URLにベーシック認証が掛かっている場合、ユーザーとパスワードを設定します。
+      ical_max_docs:
+        - 最大保存件数を設定します。
+        -
+        - iCal を取り込んだ際に記事数が「最大保存件数」を超えた場合、イベント開始日の古い順に記事を削除し、記事数が「最大保存件数」以下になるように調整します。
+        -
+        - 「最大保存件数」に 0 を指定すると、無制限に記事を保存します。
+      ical_refresh_method:
+        - iCal取り込みの更新方法を指定します。
+        - 手動の場合は、管理画面上でインポートを行うことで取り込みを行います。
+        - 自動の場合は、インストール時に設定した周期で自動で取り込みを行います。
+      ical_sync_method:
+        - 取り込んだイベント情報の同期方法を指定します。
+        - 「完全」を指定した場合、iCal配信URLの情報と完全に同期します。iCal配信URLに存在するイベント情報は追加または更新され、iCal配信URLに存在しないイベント情報は削除されます。
+        - 「追加」を指定した場合、iCal配信URLに存在するイベント情報は追加または更新されます。イベント情報を削除することはありません。
+      ical_page_state:
+        - iCal を取り込んだ際の記事のステータスを設定します。
+        - 設定しない場合、記事は公開保存されます。
+      ical_import_date_ago:
+        - 取り込む過去のイベントの日時を日単位で制限します。
+        - 省略した場合、前月分より過去のイベントは取り込みません。
+      ical_import_date_after:
+        - 取り込む未来のイベントの日時を日単位で制限します。
+        - 省略した場合、1 年以上先のイベントは取り込みません。
+    event/addon/ical_link:
+      ical_uid:
+        - ソースIDを設定します。
+      ical_link:
+        - ソースURLを設定します。
+    event/page:
+      file_import:
+        - "CSV形式またはiCal形式のファイルをインポートすることができます。"

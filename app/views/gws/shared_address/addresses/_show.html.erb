@@ -1,0 +1,28 @@
+<dl class="see">
+  <dt><%= @model.t :member_id %></dt>
+  <dd><%= tryb { @item.member.long_name } %></dd>
+
+  <dt><%= @model.t :address_group_id %></dt>
+  <dd><%= tryb { @item.address_group.name } %></dd>
+
+  <dt><%= @model.t :name %></dt>
+  <dd><%= @item.send :name %></dd>
+
+  <dt><%= @model.t :kana %></dt>
+  <dd><%= @item.send :kana %></dd>
+
+  <dt><%= @model.t :company %></dt>
+  <dd><%= @item.send :company %></dd>
+
+  <dt><%= @model.t :title %></dt>
+  <dd><%= @item.send :title %></dd>
+
+  <dt><%= @model.t :tel %></dt>
+  <dd><%= @item.send :tel %></dd>
+
+  <dt><%= @model.t :email %></dt>
+  <dd><%= @item.send :email %></dd>
+
+  <dt><%= @model.t :memo %></dt>
+  <dd><%= br @item.send :memo %></dd>
+</dl>

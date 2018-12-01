@@ -1,0 +1,44 @@
+production: &production
+  # Disable Webmail.
+  disable: false
+
+  # Disable navigation
+  disable_navi: false
+
+  # Disable quota
+  disable_quota: false
+
+  # Default settings
+  clients:
+    default:
+      # host
+      host: localhost
+      options:
+        port: 143
+      # auth_type: LOGIN, PLAIN, CRAM-MD5, DIGEST-MD5
+      auth_type: LOGIN
+      # account: uid, email
+      account: email
+
+  # Mail cache
+  cache_mails: true
+
+  # Store mail cache as static file
+  store_mails: false
+
+  # Quota cache
+  cache_quota: true
+
+  # Quota cache expires (Hours)
+  cache_quota_expires: 24
+
+  # Upper limit of user's imap account
+  imap_account_limit: 5
+
+test:
+  <<: *production
+  disable: false
+
+development:
+  <<: *production
+  disable: false

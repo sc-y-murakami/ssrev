@@ -1,0 +1,13 @@
+<div class="list-head">
+  <% if @model.allowed?(:delete, @cur_user, site: @cur_site) %>
+  <label class="check"><input type="checkbox" /></label>
+
+  <div class="list-head-action">
+    <div class="list-head-action-destroy">
+      <button class="soft-delete-all btn" data-ss-list-head-method="post" data-ss-list-head-action="<%= url_for(action: :soft_delete_all) %>" data-ss-confirmation="<%= t('ss.confirm.soft_delete') %>"><%= t :"ss.links.delete" %></button>
+    </div>
+  </div>
+  <% end %>
+
+  <%= render file: "_search" %>
+</div>

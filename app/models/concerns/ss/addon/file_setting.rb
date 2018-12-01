@@ -1,0 +1,43 @@
+module SS::Addon
+  module FileSetting
+    extend ActiveSupport::Concern
+    extend SS::Addon
+
+    included do
+      attr_accessor :in_file_resizing_width, :in_file_resizing_height
+
+      field :file_resizing, type: Array, default: []
+      field :multibyte_filename_state, type: String
+      validates :multibyte_filename_state, inclusion: { in: %w(enabled disabled), allow_blank: true }
+      permit_params :in_file_resizing_width, :in_file_resizing_height
+      permit_params :multibyte_filename_state
+
+      before_validation :set_file_resizing
+    end
+
+    def set_file_resizing
+      self.file_resizing = []
+      return if in_file_resizing_width.blank? || in_file_resizing_height.blank?
+
+      width = in_file_resizing_width.to_i
+      height = in_file_resizing_height.to_i
+
+      width = 200 if width <= 200
+      height = 200 if height <= 200
+
+      self.file_resizing = [ width, height ]
+    end
+
+    def multibyte_filename_state_options
+      %w(enabled disabled).map { |m| [ I18n.t("ss.options.multibyte_filename_state.#{m}"), m ] }.to_a
+    end
+
+    def multibyte_filename_disabled?
+      multibyte_filename_state == 'disabled'
+    end
+
+    def multibyte_filename_enabled?
+      !multibyte_filename_disabled?
+    end
+  end
+end

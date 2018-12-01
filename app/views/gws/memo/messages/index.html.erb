@@ -1,0 +1,125 @@
+<div class="index gws-memos-index">
+  <%= render file: '_list_head' %>
+  <ul class="list-items ss-messages gws-memos">
+    <li class="list-item-head">
+      <div class="head">
+        <% if @cur_folder.path == "INBOX.Sent" %>
+          <span class="field to"><%= @model.t :to %><%== @cur_user.memo_message_sort_icon(@sort_hash, "to_member_name") %></span>
+        <% else %>
+          <span class="field from"><%= @model.t :from %><%== @cur_user.memo_message_sort_icon(@sort_hash, "from_member_name") %></span>
+        <% end %>
+        <span class="field title"><%= @model.t :subject %><%== @cur_user.memo_message_sort_icon(@sort_hash, "subject") %></span>
+        <span class="field priority"><%= @model.t :priority %><%== @cur_user.memo_message_sort_icon(@sort_hash, "priority") %></span>
+        <span class="field datetime"><%= @model.t :display_send_date %><%== @cur_user.memo_message_sort_icon(@sort_hash, "send_date") %></span>
+        <span class="field size"><%= @model.t :size %><%== @cur_user.memo_message_sort_icon(@sort_hash, "size") %></span>
+      </div>
+    </li>
+
+    <% @items.each do |item| %>
+      <% if @cur_folder.sent_box? || @cur_folder.draft_box? %>
+        <li class="list-item seen">
+      <% else %>
+        <li class="list-item <%= item.unseen?(@cur_user) ? 'unseen' : 'seen' %>">
+      <% end %>
+
+        <label class="check">
+          <%= check_box_tag 'ids[]', item.id %>
+        </label>
+
+        <div class="icon icon-star <%= item.star?(@cur_user) ? 'on' : 'off' %>">
+          <%= link_to options={action: :toggle_star, id: item.id}, method: :post do %>
+            <i class="material-icons md-18">&#xE838;</i>
+          <% end %>
+        </div>
+
+        <div class="icon icon-attachment">
+          <i class="material-icons md-15"><%== item.attachments? ? '&#xE226;' : '&nbsp;' %></i>
+        </div>
+
+        <div class="info">
+          <% if @cur_folder.sent_box? %>
+            <% addr = item.to_members? ? item.display_to.first : nil %>
+            <span class="field to" title="<%= addr %>"><%= addr %></span>
+          <% else %>
+            <span class="field from" title="<%= item.from_member_name || t('gws/memo.no_senders') %>"><%= item.from_member_name || t('gws/memo.no_senders') %></span>
+          <% end %>
+          <%= link_to item.display_subject, { action: :show, id: item.id }, class: 'field title', title: item.display_subject %>
+          <span class="field priority"><%= item.label :priority %></span>
+          <span class="field datetime"><%= item.display_send_date %></span>
+          <span class="field size"><%= item.display_size %></span>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<%= paginate @items if @items.try(:current_page) %>
+
+<%= jquery do %>
+  Gws_Memo_Message.render();
+
+  <% if %w(INBOX.Sent INBOX.Draft).exclude?(params[:folder]) %>
+    $(".list-item").draggable({
+      zIndex: 100,
+      opacity: 0.75,
+      cursorAt: {top: 16, left: 5},
+      helper: function(){
+        var checkbox = $(this).find("label.check input[name='ids[]']");
+        if (!checkbox.prop("checked")){ checkbox.prop("checked", true) };
+
+        var checked = $(".list-item input:checkbox:checked");
+        var helper = $('<div style="background-color: lightgreen; padding: 2px 10px;"></div>');
+        helper.html(checked.length + "<%= t('gws/memo/message.select_check') %>");
+
+        return helper;
+      }
+    });
+  <% end %>
+
+  $(".droppable").droppable({
+    tolerance: "pointer",
+    drop: function(e, obj){
+      var to_folder = $(this).find("td a.title");
+      var from_folder = "<%= @cur_folder.name %>";
+      var drop_confirm = "";
+
+      drop_confirm += "<%= t('gws/memo/message.confirm.move_drop.head') %>";
+      drop_confirm += " \"" + from_folder + "\" ";
+      drop_confirm += "<%= t('gws/memo/message.confirm.move_drop.to') %>";
+      drop_confirm += " \"" + to_folder.text() + "\" ";
+      drop_confirm += "<%= t('gws/memo/message.confirm.move_drop.tail') %>";
+
+      var form = Gws_Memo_Message.buildForm("<%= move_all_gws_memo_messages_path(folder: params[:folder]) %>", drop_confirm);
+      form.append($("<input/>", {name: "path", value: to_folder.attr("data-path"), type: "hidden"} ));
+      form.appendTo(document.body).submit();
+    }
+  });
+
+  <% if @cur_folder.path == "INBOX.Sent" %>
+  $(".list-item-head .to").on("click", function() {
+    location.href = "<%== gws_memo_messages_path(folder: @cur_folder.folder_path) + "?" + @cur_user.memo_message_sort_query(@sort_hash, "to_member_name").to_query %>";
+    return false;
+  });
+  <% else %>
+  $(".list-item-head .from").on("click", function() {
+    location.href = "<%== gws_memo_messages_path(folder: @cur_folder.folder_path)  + "?" +  @cur_user.memo_message_sort_query(@sort_hash, "from_member_name").to_query %>";
+    return false;
+  });
+  <% end %>
+  $(".list-item-head .title").on("click", function() {
+    location.href = "<%== gws_memo_messages_path(folder: @cur_folder.folder_path)  + "?" +  @cur_user.memo_message_sort_query(@sort_hash, "subject").to_query %>";
+    return false;
+  });
+  $(".list-item-head .priority").on("click", function() {
+    location.href = "<%== gws_memo_messages_path(folder: @cur_folder.folder_path)  + "?" +  @cur_user.memo_message_sort_query(@sort_hash, "priority").to_query %>";
+    return false;
+  });
+  $(".list-item-head .datetime").on("click", function() {
+    location.href = "<%== gws_memo_messages_path(folder: @cur_folder.folder_path)  + "?" +  @cur_user.memo_message_sort_query(@sort_hash, "send_date").to_query %>";
+    return false;
+  });
+  $(".list-item-head .size").on("click", function() {
+    location.href = "<%== gws_memo_messages_path(folder: @cur_folder.folder_path)  + "?" +  @cur_user.memo_message_sort_query(@sort_hash, "size").to_query %>";
+    return false;
+  });
+<% end %>

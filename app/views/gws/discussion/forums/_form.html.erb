@@ -1,0 +1,16 @@
+<%= javascript_tag do %>
+$(window).on('load', function() {
+  $(".addon-body.toggle-body").show();
+});
+<% end %>
+
+<dl class="see">
+  <dt class="required"><%= @model.t :name %><%= @model.tt :name %></dt>
+  <dd><%= f.text_field :name %></dd>
+
+  <dt><%= @model.t :order %><%= @model.tt :order %></dt>
+  <dd><%= f.number_field :order %></dd>
+
+  <dt><%= @model.t :forum_quota %><%= @model.tt :forum_quota %></dt>
+  <dd class="short"><%= f.number_field :forum_quota, min: 0 %> <span class="postfix"><%= t('ss.units.mega_byte') %></span></dd>
+</dl>

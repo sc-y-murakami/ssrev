@@ -1,0 +1,16 @@
+<dl class="see">
+  <dt><%= @model.t :name %></dt>
+  <dd><%= @item.name %></dd>
+
+  <dt><%= @model.t :order %></dt>
+  <dd><%= @item.order %></dd>
+
+  <dt><%= @model.t :permit_comment %></dt>
+  <dd><%= @item.label :permit_comment %></dd>
+
+  <dt><%= @model.t :permanently %></dt>
+  <dd><%= @item.label :permanently %></dd>
+
+  <dt><%= @model.t :topic_quota %></dt>
+  <dd><%= @item.topic_quota %> <%= t('ss.units.mega_byte') if @item.topic_quota %></dd>
+</dl>

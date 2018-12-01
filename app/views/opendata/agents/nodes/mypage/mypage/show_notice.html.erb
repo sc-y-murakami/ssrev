@@ -1,0 +1,16 @@
+<% if @notice && @notice.commented_count != 0 %>
+ <%= jquery do %>
+  $(".confirm").click(function (event) {
+    $.ajax({
+      url: "<%= mypage_path %>notice/confirm.html",
+      type: "GET",
+      success: function (data) {
+        $("#my-notice").html(data);
+      }
+    });
+    event.preventDefault();
+  });
+  <% end %>
+
+  <%= link_to @notice.commented_count, "", class: "confirm" %>
+<% end %>

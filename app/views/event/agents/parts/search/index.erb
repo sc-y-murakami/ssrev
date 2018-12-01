@@ -1,0 +1,30 @@
+<%= form_for(:item, url: @cur_part.search_url, method: "get", html: { class: 'event-search' }) do %>
+  <fieldset class="keyword">
+    <label for="search_keyword"><%= t("event.keyword") %></label>
+    <%= text_field_tag :search_keyword, nil, class: "keyword" %>
+  </fieldset>
+
+  <fieldset class="categories">
+    <legend><%= t("event.category.setting") %></legend>
+    <% @categories.each do |cate| %>
+      <%= label_tag("q_category_ids_#{cate.id}", class: "category") do %>
+        <%= check_box_tag 'category_ids[]', cate.id, nil,
+          { id: "q_category_ids_#{cate.id}", class: "prop"} %>
+        <%= cate.name %>
+      <% end %>
+    <% end %>
+  </fieldset>
+
+  <fieldset class="event-date-range">
+    <legend><%= t("event.dates.setting") %></legend>
+    <div class="dates location">
+      <%= text_field_tag "event[][start_date]", nil, { id: nil, class: "date js-date start", title: t("event.dates.start_date") } %>
+      - <%= text_field_tag "event[][close_date]", nil, { id: nil, class: "date js-date close", title: t("event.dates.close_date") } %>
+    </div>
+  </fieldset>
+
+  <footer class="send">
+    <%= submit_tag t('event.submit.search'), name: nil %>
+    <%= submit_tag t('event.submit.reset'), name: nil, type: :reset, class: :search_clear %>
+  </footer>
+<% end %>

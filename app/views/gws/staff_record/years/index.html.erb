@@ -1,0 +1,32 @@
+<% @index_title = proc do |item| %>
+  <%= link_to item.name_with_code, { action: :show, id: item }, class: "title" %>
+<% end %>
+
+<% @index_meta = proc do |item| %>
+  <span class="id">#<%= item.id %></span>
+  <span class="datetime"><%= item.updated.strftime("%Y/%m/%d %H:%M") %></span>
+
+  <% if Gws::StaffRecord::Group.allowed?(:read, @cur_user, site: @cur_site) %>
+    <span>
+      <%= link_to gws_staff_record_groups_path(year: item.id) do %>
+        <%= t('mongoid.models.gws/staff_record/group') %> (<%= number_with_delimiter item.yearly_groups.size %>)
+      <% end %>
+    </span>
+  <% end %>
+  <% if Gws::StaffRecord::User.allowed?(:read, @cur_user, site: @cur_site) %>
+    <span>
+      <%= link_to gws_staff_record_users_path(year: item.id) do %>
+        <%= t('mongoid.models.gws/staff_record/user') %> (<%= number_with_delimiter item.yearly_users.size %>)
+      <% end %>
+    </span>
+  <% end %>
+  <% if Gws::StaffRecord::Seating.allowed?(:read, @cur_user, site: @cur_site) %>
+    <span>
+      <%= link_to gws_staff_record_seatings_path(year: item.id) do %>
+        <%= t('mongoid.models.gws/staff_record/seating') %> (<%= number_with_delimiter item.yearly_seatings.size %>)
+      <% end %>
+    </span>
+  <% end %>
+<% end %>
+
+<%= render file: "gws/crud/index" %>

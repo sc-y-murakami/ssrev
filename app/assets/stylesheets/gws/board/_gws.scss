@@ -1,0 +1,94 @@
+// list
+.gws-boards {
+  .unread {
+    background-color: #f9e9e3;
+    &:hover {
+      background: $orange2;
+    }
+  }
+}
+.gws-board-file-count {
+  img {
+    margin: 0 2px 0 5px;
+  }
+}
+.gws-board-flag-new {
+  margin-right: 8px;
+  color: #d00;
+  font-weight: bold;
+  &:after { content: "New!"; }
+}
+
+// show
+.gws-board {
+  .topic, .comment, .subscribed-users {
+    @include box;
+    margin-bottom: 2px;
+    header {
+      @include box-head;
+      .name {
+        margin-right: 4px;
+      }
+    }
+    .heading {
+      margin-bottom: 8px;
+      padding-left: 8px;
+      border-left: 3px solid #2d3e92;
+      color: $black3;
+      font-weight: bold;
+    }
+    .body {
+      @include box-body;
+    }
+    .files, .links {
+      margin: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      background-color: $gray1;
+    }
+    .files a, .link-item {
+      line-height: 1.5;
+      word-break: normal;
+      word-wrap: normal;
+    }
+    .status {
+      padding: 15px;
+    }
+  }
+  .meta {
+    .user {
+      margin-right: 5px;
+      font-weight: bold;
+    }
+  }
+  .menu {
+    padding: 0 5px 10px;
+    text-align: right;
+    a {
+      margin: 0 4px;
+    }
+    a.primary {
+      @include grd-orange;
+    }
+  }
+  .comments {
+    padding-left: 20px;
+  }
+
+  .subscribed-users {
+    .index {
+      .name {
+        width: 40em;
+      }
+      time {
+        margin: 0 4px;
+        &:before {
+          content: '('
+        }
+        &:after {
+          content: ')'
+        }
+      }
+    }
+  }
+}

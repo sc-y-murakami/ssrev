@@ -1,0 +1,19 @@
+<nav class="nav-menu">
+  <% if params[:action] =~ /index/ %>
+    <% if @model.allowed?(:edit, @cur_user, site: @cur_site) %>
+      <%= link_to t('ss.links.new'), new_gws_monitor_admin_path %>
+    <% end %>
+  <% elsif params[:action] =~ /new|create|lock|categories/ %>
+    <%= link_to t('ss.links.back_to_index'), action: :index %>
+  <% elsif params[:action] =~ /edit|update|delete|move/ %>
+    <% if @item.allowed?(:read, @cur_user, site: @cur_site) %>
+      <%= link_to t('ss.links.back_to_show'), action: :show, id: @item %>
+    <% end %>
+    <%= link_to t('ss.links.back_to_index'), action: :index %>
+  <% else %>
+    <% if @model.allowed?(:edit, @cur_user, site: @cur_site) && params['action'] == 'show' %>
+      <%= link_to t('gws/monitor.links.forward'), forward_gws_monitor_admin_path(id: @item) %>
+    <% end %>
+    <%= link_to t('ss.links.back_to_index'), action: :index %>
+  <% end %>
+</nav>

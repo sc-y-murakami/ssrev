@@ -1,0 +1,14 @@
+<div class="list-head">
+  <label class="check"><input type="checkbox" /></label>
+
+  <div class="list-head-action">
+    <% if @model.allowed?(:edit, @cur_user, site: @cur_site) %>
+      <button class="soft-delete-all btn" data-ss-list-head-method="post" data-ss-list-head-action="<%= url_for(action: :soft_delete_all) %>" data-ss-confirmation="<%= t('ss.confirm.soft_delete') %>"><%= t('ss.links.delete') %></button>
+    <% end %>
+    <button class="download-all btn" data-ss-list-head-method="post" data-ss-list-head-action="<%= url_for(action: :download_all) %>" data-ss-confirmation="<%= t('gws/circular.confirm.download') %>"><%= t('gws/circular.post.download') %></button>
+  </div>
+
+  <div class="list-head-search">
+    <%= render file: '_search' %>
+  </div>
+</div>

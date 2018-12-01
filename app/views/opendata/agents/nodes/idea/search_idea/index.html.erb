@@ -1,0 +1,44 @@
+<% file = "#{@cur_node.path}/search.html" %>
+<% if !controller.preview_path? && Fs.exists?(file) %>
+  <%== Fs.read(file) %>
+<% else %>
+  <%= render file: 'opendata/agents/nodes/idea/search_idea/search' %>
+<% end %>
+
+<%= paginate @items %>
+
+<div class="opendata-search-ideas pages">
+  <% @items.each do |item| %>
+  <article>
+    <header>
+      <time datetime="<%= item.date.to_date %>"><%= I18n.l item.date.to_date, format: :long %></time>
+      <h2><%= link_to item.name, item.url %>
+        <% if item.parent.becomes_with_route.show_point? %>
+        <span class="point"><%= item.point.to_i %></span>
+        <% end %>
+      </h2>
+    </header>
+    <div class="categories">
+      <% item.categories.each_with_index do |category, idx| %>
+        <span class="category"><%= category.name %></span>
+      <% end %>
+      <% item.areas.each_with_index do |area, idx| %>
+        <span class="area"><%= area.name %></span>
+      <% end %>
+      <% item.tags.each_with_index do |tag, idx| %>
+        <span class="tag"><%= tag %></span>
+      <% end %>
+    </div>
+  </article>
+  <% end %>
+
+  <% if @items.blank? %>
+  <article>
+    <header>
+      <h2><%= I18n.t("opendata.labels.no_idea") %></h2>
+    </header>
+  </article>
+  <% end %>
+</div>
+
+<%= paginate @items %>

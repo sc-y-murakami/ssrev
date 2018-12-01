@@ -1,0 +1,51 @@
+.mod-workflow-request {
+  margin: 0px 0px 15px;
+  padding: 5px 0;
+  background: $gray1;
+  h1 {
+    padding: 8px 10px;
+  }
+  .buttons {
+    margin: 10px 0px 10px;
+    button {
+      margin: 0px 10px 0px 0px;
+      padding: 0px 30px;
+    }
+  }
+}
+.mod-workflow-approve {
+  textarea {
+    margin-bottom: 10px;
+  }
+}
+.workflow-level-header {
+  margin: 20px 10px 0;
+  padding-left: 8px;
+  border-left: 3px solid $orange;
+  color: $black3;
+  font-size: $px16;
+  font-weight: bold;
+}
+
+.mod-workflow-view {
+  .approver-files {
+    margin-top: 5px;
+  }
+
+  .approver-file {
+    -js-display: flex;
+    @include display-flex;
+    @include align-items(center);
+    padding: 5px 0;
+
+    .thumb {
+      width: 48px;
+      max-height: 48px;
+      text-align: center;
+    }
+
+    .name {
+      margin-left: 5px;
+    }
+  }
+}

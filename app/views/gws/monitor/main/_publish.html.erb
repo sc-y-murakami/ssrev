@@ -1,0 +1,7 @@
+<dl class="see">
+  <dt class="required"><%= @model.t :name %></dt>
+  <dd><%= @item.name %><%= f.hidden_field :state, value: 'public' %></dd>
+
+  <dt><%= @model.t :released %><%= @model.tt :released %></dt>
+  <dd><%= f.text_field :released, class: "datetime js-datetime", value: tryb { @item.released.strftime("%Y/%m/%d %H:%M") } %></dd>
+</dl>

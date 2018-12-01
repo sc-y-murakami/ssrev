@@ -1,0 +1,6 @@
+<%
+  attendance = @item.attendances.where(user_id: member.id).order_by(created: 1).first
+  attendance ||= @item.attendances.build(cur_user: member)
+%>
+
+<%= attendance.label(:attendance_state) %>

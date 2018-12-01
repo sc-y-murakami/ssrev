@@ -1,0 +1,24 @@
+<% @tap_menu = proc do |item| %>
+  <%= link_to t('ss.links.show'), action: :show, id: item %>
+  <%= link_to t('gws/schedule/todo.links.restore'), action: :undo_delete, id: item if item.allowed?(:delete, @cur_user, site: @cur_site) %>
+  <%= link_to t('ss.links.delete'), action: :delete, id: item if item.allowed?(:delete, @cur_user, site: @cur_site) %>
+<% end %>
+
+<% @index_title = proc do |item| %>
+    <% title = item.try(:name) || item.try(:title) || item.try(:filename) || "##{item.id}" %>
+    <%= link_to title, { action: :show, id: item }, class: 'title' %>
+<% end %>
+
+<% @index_meta = proc do |item| %>
+  <span><%= item.label(:todo_state) %></span>
+  <span class="datetime">
+    <%= @model.t(:term) %>: <%= item.end_at.strftime('%Y/%m/%d %H:%M') %>
+    <% if item.todo_state == 'unfinished' && item.end_at < Time.zone.now %>
+    <span class="todo-over"><%= t('gws/schedule/todo.todo_over') %></span>
+    <% end %>
+  </span>
+  <span class="datetime"><%= @model.t(:updated) %>: <%= item.updated.strftime('%Y/%m/%d %H:%M') %></span>
+  <span class="datetime"><%= @model.t(:created) %>: <%= item.created.strftime('%Y/%m/%d %H:%M') %></span>
+<% end %>
+
+<%= render file: 'gws/crud/index' %>

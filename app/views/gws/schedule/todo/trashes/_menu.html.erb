@@ -1,0 +1,16 @@
+<nav class="nav-menu">
+  <% if params[:action] == 'show' %>
+    <% if @item.allowed?(:delete, @cur_user, site: @cur_site) %>
+      <%= link_to t('ss.links.restore'), action: :undo_delete  %>
+      <%= link_to t('ss.links.delete'), action: :delete  %>
+    <% end %>
+  <% end %>
+  <% if params[:action] =~ /delete/ %>
+    <% if @item.allowed?(:read, @cur_user, site: @cur_site) || @item.member?(@cur_user) || @item.readable?(@cur_user) %>
+      <%= link_to t('ss.links.back_to_show'), action: :show, id: @item %>
+    <% end %>
+  <% end %>
+  <% if params[:id] %>
+    <%= link_to t('ss.links.back_to_index'), action: :index %>
+  <% end %>
+</nav>

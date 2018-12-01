@@ -1,0 +1,35 @@
+<%= jquery do %>
+  var navi = new Gws_Category_Navi('.gws-category-navi');
+  navi.setBaseUrl('<%= gws_circular_trashes_path(category: 'ID') %>');
+  navi.render(<%== @categories.to_json(only: %i(_id name), methods: :trailing_name) %>);
+<% end %>
+
+<div class="gws-category-navi dropdown">
+  <%= link_to gws_circular_trashes_path(category: '-'), class: 'btn dropdown-toggle' do %>
+    <%= @category.try(:trailing_name) || t('gws.category') %>
+    <i class="material-icons md-13">&#xE313;</i>
+  <% end %>
+  <div class="dropdown-menu dropdown-menu--white"></div>
+</div>
+
+<% @tap_menu = proc do |item| %>
+  <%= link_to t('ss.links.show'), action: :show, id: item if item.allowed?(:read, @cur_user, site: @cur_site) %>
+  <%= link_to t('ss.links.restore'), action: :undo_delete, id: item if item.allowed?(:delete, @cur_user, site: @cur_site) %>
+  <%= link_to t('ss.links.delete'), action: :delete, id: item if item.allowed?(:delete, @cur_user, site: @cur_site) %>
+<% end %>
+
+<% @index_meta = proc do |item| %>
+  <span class="id">#<%= item.id %></span>
+  <span class="datetime"><%= tryb { item.due_date.strftime('%Y/%m/%d %H:%M') } %></span>
+  <span><%= item.user_long_name %></span>
+  <span class="gws-share-categories">
+    <span class="gws-category-label" style="background-color: gray; color: #ffffff;"><%= t('gws/circular.post.disabled') %></span>
+    <% item.categories.compact.each do |category| %>
+      <%= link_to category.trailing_name, gws_circular_trashes_path(category: category.id),
+                  class: 'gws-category-label', style: category_label_css(category) %>
+    <% end %>
+    </span>
+<% end %>
+
+<%#= render "gws/circular/main/tabs" %>
+<%= render file: 'gws/crud/index' %>

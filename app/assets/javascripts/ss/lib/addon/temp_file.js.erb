@@ -1,0 +1,113 @@
+this.SS_Addon_TempFile = (function () {
+  function SS_Addon_TempFile(selector, userId, options) {
+    this.$selector = $(selector);
+    this.userId = userId;
+    this.dropEventTriggered = null;
+
+    if (options && options.select) {
+      this.select = options.select;
+    }
+
+    if (options && options.selectUrl) {
+      this.selectUrl = options.selectUrl;
+    }
+
+    if (options && options.uploadUrl) {
+      this.uploadUrl = options.uploadUrl;
+    }
+
+    this.render();
+  }
+
+  SS_Addon_TempFile.renderDrop = function (selector, userId) {
+    return new SS_Addon_TempFile(selector, userId, {});
+  }
+
+  SS_Addon_TempFile.prototype.select = function (files, dropArea) {
+    for (var j = 0, len = files.length; j < len; j++) {
+      var file = files[j];
+      var id = file["_id"];
+      var url = this.selectUrl(id);
+      $.ajax({
+        url: url,
+        success: function (data) {
+          $("#selected-files").append(data);
+        }
+      });
+    }
+  };
+
+  SS_Addon_TempFile.prototype.selectUrl = function (id) {
+    return "/.u" + this.userId + "/apis/temp_files/" + id + "/select";
+  };
+
+  SS_Addon_TempFile.prototype.uploadUrl = function () {
+    return "/.u" + this.userId + "/apis/temp_files.json";
+  };
+
+  SS_Addon_TempFile.prototype.render = function() {
+    var _this = this;
+    this.$selector.each(function (i, da) {
+      da = $(da);
+      da.on('dragenter', function (e) {
+        da.addClass('file-dragenter');
+        return false;
+      });
+      da.on('dragleave', function (e) {
+        da.removeClass('file-dragenter');
+        return false;
+      });
+      da.on('dragover', function (e) {
+        da.addClass('file-dragenter');
+        return false;
+      });
+      da.on('drop', function (e) {
+        var dropArea = e.target;
+        var token = $('meta[name="csrf-token"]').attr('content');
+        var formData = new FormData();
+        formData.append('authenticity_token', token);
+        if ($('#file-resizing').val()) {
+          formData.append('item[resizing]', $('#file-resizing').val());
+        }
+        var files = e.originalEvent.dataTransfer.files;
+        if (files.length === 0) {
+          return false;
+        }
+        if (_this.dropEventTriggered) {
+          return false;
+        }
+        _this.dropEventTriggered = true;
+        for (var j = 0, len = files.length; j < len; j++) {
+          formData.append('item[in_files][]', files[j]);
+        }
+        var request = new XMLHttpRequest();
+        request.onload = function (e) {
+          if (request.readyState === XMLHttpRequest.DONE) {
+            da.removeClass('file-dragenter');
+            if (request.status === 200 || request.status === 201) {
+              var files = JSON.parse(request.response);
+              _this.select(files, dropArea);
+            } else if (request.status === 413) {
+              alert(["== Error =="].concat("<%= I18n.t('errors.messages.request_entity_too_large') %>").join("\n"));
+            } else {
+              try {
+                var json = $.parseJSON(request.response);
+                alert(["== Error =="].concat(json).join("\n"));
+              } catch (_error) {
+                alert(["== Error =="].concat(request.statusText).join("\n"));
+              }
+            }
+            _this.dropEventTriggered = false;
+          }
+        };
+        request.open("POST", _this.uploadUrl());
+        request.send(formData);
+        return false;
+      });
+    });
+  };
+
+  return SS_Addon_TempFile;
+
+})();
+
